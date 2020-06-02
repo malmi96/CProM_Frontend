@@ -1,0 +1,132 @@
+<!--Add Material Card-->
+<div>
+  <form>
+    <div class="ml-2" style="width: 20cm;">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>Add New Material</h2>
+          </mdb-card-title>
+          <mdb-card-text>
+            <form>
+              <div class="row">
+                <div>
+                  <mat-form-field class="ml-3">
+                    <mat-label>Select Material Category</mat-label>
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let Category of categories"
+                        [value]="Category"
+                      >
+                        {{ Category }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <mdb-icon fas icon="info-circle"></mdb-icon>
+              </div>
+              <div class="row">
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    type="text"
+                    name="brand"
+                    class="form-control-sm"
+                    ngModel
+                    #brand="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="brand" class="">Brand</label>
+                </div>
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    type="text"
+                    name="material"
+                    class="form-control-sm"
+                    ngModel
+                    #material="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="material" class="">Material</label>
+                </div>
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    type="text"
+                    name="size"
+                    class="form-control-sm"
+                    ngModel
+                    #size="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="size" class="">Size</label>
+                </div>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  required
+                  type="text"
+                  name="materialType"
+                  class="form-control"
+                  value="{{
+                    brand.value + '-' + material.value + '-' + size.value
+                  }}"
+                />
+                <label for="materialType" class="">Material Type</label>
+              </div>
+              <div class="row">
+                <mat-form-field class="ml-3">
+                  <mat-label>Quantity</mat-label>
+                  <input matInput />
+                </mat-form-field>
+                <div>
+                  <mat-form-field class="ml-3">
+                    <mat-label>Select unit</mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let unit of units" [value]="unit">
+                        {{ unit }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <a class="text-success" (click)="openDialog()">
+                  <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                </a>
+              </div>
+
+              <div class="md-form">
+                <input
+                  mdbInput
+                  type="number"
+                  name="unitCost"
+                  class="form-control"
+                />
+                <label for="unitCost" class="">Unit Cost(Rs.)</label>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  type="number"
+                  name="criticalLevel"
+                  class="form-control"
+                />
+                <label for="criticalLevel" class="">Critical Level</label>
+              </div>
+            </form>
+          </mdb-card-text>
+          <button
+            mdbBtn
+            class="float-right"
+            type="button"
+            color="success"
+            mdbWavesEffect
+          >
+            Add Material
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </form>
+</div>

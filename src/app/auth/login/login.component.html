@@ -1,0 +1,115 @@
+<!-- Material form login -->
+<main>
+  <mdb-card class="login-card" *ngIf="!isLoading">
+    <mdb-card-header class="purple white-text text-center py-4">
+      <h2>
+        <strong>LOGIN</strong>
+      </h2>
+    </mdb-card-header>
+
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5 pt-0">
+      <br />
+      <!-- Form -->
+      <form
+        #loginForm="ngForm"
+        class="text-center"
+        style="color: #757575;"
+        (ngSubmit)="submit(loginForm)"
+      >
+        <div>
+          <label>Select User Type</label>
+        </div>
+
+        <!-- Default inline 1-->
+        <div class="radio">
+          <label for="userType" *ngFor="let userType of userTypes">
+            <input
+              type="radio"
+              class="ml-2"
+              name="userType"
+              [value]="userType"
+              ngModel
+              required
+            />{{ userType }}
+          </label>
+        </div>
+        <!-- Email -->
+        <div class="md-form">
+          <input
+            mdbInput
+            mdbValidate
+            name="email"
+            type="email"
+            class="form-control"
+            ngModel
+            #email="ngModel"
+            required
+            pattern="[^ @]*@[^ @]*"
+          />
+          <label for="email">Email</label>
+          <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
+            >Invalid email</mdb-error
+          >
+          <mdb-success *ngIf="email.valid && (email.dirty || email.touched)"
+            >Valid</mdb-success
+          >
+        </div>
+
+        <!-- Password -->
+        <div class="md-form">
+          <input
+            mdbInput
+            mdbValidate
+            type="password"
+            name="password"
+            class="form-control"
+            ngModel
+            minlength="8"
+            required
+            #password="ngModel"
+          />
+          <label for="password">Password</label>
+          <mdb-error
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            >Please enter 8 characters</mdb-error
+          >
+          <mdb-success
+            *ngIf="password.valid && (password.dirty || password.touched)"
+            >Valid password</mdb-success
+          >
+        </div>
+
+        <div class="d-flex justify-content-around">
+          <div>
+            <!-- Forgot password -->
+            <a href="">Forgot password?</a>
+          </div>
+        </div>
+
+        <!-- Login button -->
+        <button
+          mdbBtn
+          color="purple"
+          outline="true"
+          rounded="true"
+          block="true"
+          class="my-4 waves-effect z-depth-0"
+          mdbWavesEffect
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+
+        <!-- Register -->
+        <p>
+          Not a member?
+          <a href="">Send an enquiry</a>
+        </p>
+      </form>
+      <!-- Form -->
+    </mdb-card-body>
+  </mdb-card>
+</main>
+<div><mat-spinner *ngIf="isLoading"></mat-spinner></div>

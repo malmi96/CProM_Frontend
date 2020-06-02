@@ -1,0 +1,143 @@
+<form #employeeRegister="ngForm" (ngSubmit)="submit(employeeRegister)">
+  <div class="md-form ml-4 mr-4">
+    <div class="row">
+      <select
+        class="browser-default custom-select"
+        name="designation"
+        #designation="ngModel"
+        ngModel
+      >
+        <option selected value="Finance Manager">Finance Manager</option>
+        <option value="Inventory Manager">Inventory Manager</option>
+        <option value="Project Manager">Project Manager</option>
+        <option value="Sales and Marketing Manager"
+          >Sales and Marketing Manager</option
+        >
+      </select>
+    </div>
+    <div class="md-form form-sm">
+      <input
+        mdbInput
+        mdbValidate
+        type="text"
+        name="employeeName"
+        class="form-control form-control-sm"
+        ngModel
+        #fullName="ngModel"
+        required
+      />
+      <label for="employeeName">Full Name</label>
+    </div>
+    <div class="md-form form-sm">
+      <input
+        mdbValidate
+        required
+        mdbInput
+        type="text"
+        name="nic"
+        class="form-control form-control-sm"
+        ngModel
+        #nic="ngModel"
+      />
+      <label for="nic" class="">NIC</label>
+    </div>
+    <div class="md-form form-sm">
+      <input
+        mdbInput
+        mdbValidate
+        required
+        type="email"
+        name="email"
+        class="form-control form-control-sm"
+        ngModel
+        #email="ngModel"
+      />
+      <label for="email">Email</label>
+      <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
+        >Invalid email</mdb-error
+      >
+      <mdb-success *ngIf="email.valid && (email.dirty || email.touched)"
+        >Valid</mdb-success
+      >
+    </div>
+
+    <div class="md-form form-sm">
+      <input
+        mdbInput
+        mdbValidate
+        required
+        type="text"
+        name="address"
+        class="form-control form-control-sm"
+        ngModel
+        #address="ngModel"
+      />
+      <label for="address" class="">Address</label>
+    </div>
+    <div class="md-form form-sm">
+      <input
+        mdbInput
+        mdbValidate
+        required
+        type="number"
+        name="contactNo"
+        class="form-control form-control-sm"
+        ngModel
+        #contactNo="ngModel"
+      />
+      <label for="contactNo" class="">Contact Number</label>
+    </div>
+    <div class="form-inline">
+      <div class="md-form form-sm form-inline mt-0">
+        <input
+          mdbInput
+          mdbValidate
+          required
+          type="password"
+          name="password"
+          class="form-control form-control-sm"
+          minlength="8"
+          ngModel
+          #password="ngModel"
+        />
+        <label for="password">Password</label>
+        <mdb-error
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          >Please enter 8 characters</mdb-error
+        >
+        <mdb-success
+          *ngIf="password.valid && (password.dirty || password.touched)"
+          >Valid password</mdb-success
+        >
+      </div>
+      <div class="md-form form-sm form-inline ml-4 mt-0">
+        <input
+          mdbInput
+          mdbValidate
+          required
+          type="password"
+          name="confirmPassword"
+          class="form-control form-control-sm pull-right"
+          ngModel
+          #confirmPassword="ngModel"
+        />
+        <label for="confirmPassword">Confirm Password</label>
+        <mdb-error *ngIf="message === true">Passwords do not match</mdb-error>
+      </div>
+    </div>
+    <div class="float-right">
+      <button
+        type="submit"
+        mdbBtn
+        color="success"
+        mdbWavesEffect
+        [disabled]="employeeRegister.invalid"
+      >
+        Register
+      </button>
+      <button type="button" mdbBtn color="danger" mdbWavesEffect>
+        Clear
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,40 @@
+<div class="user">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h2>User Registration</h2>
+      </mdb-card-title>
+      <form #registerForm="ngForm" (ngSubmit)="submit(registerForm)">
+        <div class="ml-4">
+          <label>Select User Type</label>
+        </div>
+        <div class="radio ml-4">
+          <input
+            type="radio"
+            class="ml-2"
+            name="userType"
+            ngModel
+            #customer="ngModel"
+            [value]="customer"
+            routerLink="./customer"
+          />
+          <label for="customer">Customer</label>
+
+          <input
+            type="radio"
+            class="ml-2"
+            name="userType"
+            ngModel
+            #employee="ngModel"
+            [value]="employee"
+            routerLink="./employee"
+          />
+          <label for="employee">Employee</label>
+        </div>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </form>
+    </mdb-card-body>
+  </mdb-card>
+</div>

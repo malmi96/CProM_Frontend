@@ -1,0 +1,59 @@
+<!--Machinery Details Card-->
+<div>
+  <form>
+    <div class="ml-2" style="width: 20cm;">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>Add New Machinery Details</h2>
+          </mdb-card-title>
+          <mdb-card-text>
+            <form>
+              <div class="md-form">
+                <select class="browser-default custom-select">
+                  <option selected>Select Machinery Type</option>
+                  <option
+                    *ngFor="let machinery of machineries"
+                    [value]="machinery"
+                    >{{ machinery }}</option
+                  >
+                </select>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  required
+                  type="text"
+                  name="machineryName"
+                  class="form-control"
+                />
+                <label for="machineryName" class="">Machinery Name</label>
+                <mdb-icon fas icon="info-circle"></mdb-icon>
+              </div>
+              <div>
+                <mat-form-field>
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker" />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </form>
+          </mdb-card-text>
+          <button
+            mdbBtn
+            class="float-right"
+            type="button"
+            color="success"
+            mdbWavesEffect
+          >
+            Add Machinery
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </form>
+</div>

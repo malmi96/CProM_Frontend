@@ -1,0 +1,101 @@
+<!-- Editable table -->
+<div class="card">
+  <h2 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Details of the Materials
+  </h2>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success" (click)="add()">
+          <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+        </a>
+      </span>
+      <table
+        class="table table-bordered table-responsive-md table-striped text-center"
+      >
+        <tr>
+          <th class="text-center">Material Type</th>
+          <th class="text-center">Current Quantity</th>
+          <th class="text-center">Unit</th>
+          <th class="text-center">Unit Cost(Rs.)</th>
+          <th class="text-center">Critical Level</th>
+          <th class="text-center">Update</th>
+          <th class="text-center">Remove</th>
+        </tr>
+        <tr *ngFor="let person of personList; let id = index">
+          <td>
+            <span
+              (keyup)="changeValue(id, 'materialType', $event)"
+              (blur)="updateList(id, 'materialType', $event)"
+              contenteditable="true"
+              >{{ person.materialType }}</span
+            >
+          </td>
+          <td>
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'quantity', $event)"
+              (blur)="updateList(id, 'quantity', $event)"
+              >{{ person.quantity }}</span
+            >
+          </td>
+          <td>
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'unit', $event)"
+              (blur)="updateList(id, 'unit', $event)"
+              >{{ person.unit }}</span
+            >
+          </td>
+          <td>
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'unitCost', $event)"
+              (blur)="updateList(id, 'unitCost', $event)"
+              >{{ person.unitCost }}</span
+            >
+          </td>
+          <td>
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'criticalLevel', $event)"
+              (blur)="updateList(id, 'criticalLevel', $event)"
+              >{{ person.criticalLevel }}</span
+            >
+          </td>
+          <td>
+            <span class="table-update">
+              <button
+                type="button"
+                mdbBtn
+                color="success"
+                rounded="true"
+                size="sm"
+                class="my-0"
+                (click)="remove(id)"
+              >
+                Update
+              </button>
+            </span>
+          </td>
+          <td>
+            <span class="table-remove">
+              <button
+                type="button"
+                mdbBtn
+                color="danger"
+                rounded="true"
+                size="sm"
+                class="my-0"
+                (click)="remove(id)"
+              >
+                Remove
+              </button>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->

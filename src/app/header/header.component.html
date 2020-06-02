@@ -1,0 +1,414 @@
+<!--Navbar-->
+<mdb-navbar
+  SideClass="navbar navbar-expand-lg navbar-dark mdb-color darken-3"
+  [containerInside]="false"
+>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand
+    ><a class="navbar-brand" href="#">CProM</a></mdb-navbar-brand
+  >
+
+  <!-- Collapsible content -->
+  <links>
+    <!-- Project Manager Nav Links -->
+    <ul class="navbar-nav mr-auto">
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Projects</a
+        >
+      </li>
+      <li
+        class="nav-item dropdown"
+        dropdown
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+          routerLink="/userRegister"
+        >
+          Users</a
+        >
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Action</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Another action</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Something else here</a
+          >
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Separated link</a
+          >
+        </div>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Timeline</a
+        >
+      </li>
+      <li
+        class="nav-item dropdown"
+        dropdown
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          Inventory</a
+        >
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/material"
+            >Material</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/machinery"
+            >Machinery</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/labour"
+            >Labour</a
+          >
+          <div class="dropdown-item waves-light"></div>
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/supplier"
+            >Supplier</a
+          >
+        </div>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Reports</a
+        >
+      </li>
+
+      <!-- Inventory Manager Nav Links -->
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Projects</a
+        >
+      </li>
+      <li
+        class="nav-item dropdown"
+        dropdown
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+          routerLink="/material"
+        >
+          Material</a
+        >
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Add Material</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >View Materials</a
+          >
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Allocation</a
+          >
+
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Consumption</a
+          >
+        </div>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="./machinery"
+          >Machinery</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="./supplier"
+          >Supplier</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Inventory Manager'"
+      >
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="./labour"
+          >Labour</a
+        >
+      </li>
+
+      <!-- Finance Manager Nav Links -->
+
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Finance Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Finance Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Projects</a
+        >
+      </li>
+      <li
+        class="nav-item dropdown"
+        dropdown
+        *ngIf="userAuthenticated && user === 'Finance Manager'"
+      >
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+          routerLink=""
+        >
+          Payments</a
+        >
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Customer Payments</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Materials Payments</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Machinery Payments</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Labour Payments</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Utility and Transport Payments</a
+          >
+        </div>
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Finance Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink=""
+          >Reports</a
+        >
+      </li>
+
+      <!-- Customer Nav Links -->
+      <li class="nav-item" *ngIf="userAuthenticated && user === 'Customer'">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="userAuthenticated && user === 'Customer'">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink=""
+          >Project Progress</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="userAuthenticated && user === 'Customer'">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink=""
+          >Project Gallery</a
+        >
+      </li>
+      <!-- Sales and Marketing Manager Nav Links -->
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Sales and Marketing Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Sales and Marketing Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink=""
+          >Projects</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Sales and Marketing Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink=""
+          >Inquiry Details</a
+        >
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item avatar dropdown" dropdown *ngIf="!userAuthenticated">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
+          routerLink="/login"
+          >Login</a
+        >
+
+        <!--
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+          role="menu"
+        >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >My account</a
+          >
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
+            >Log out</a
+          >
+        </div>-->
+      </li>
+      <li *ngIf="userAuthenticated">
+        <label style="color: aliceblue;">{{ user }}</label>
+        <button
+          type="button"
+          mdbBtn
+          color="dark"
+          mdbWavesEffect
+          (click)="onLogout()"
+        >
+          Logout
+        </button>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+<!--/.Navbar-->

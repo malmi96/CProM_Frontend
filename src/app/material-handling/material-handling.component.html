@@ -1,0 +1,42 @@
+<div>
+  <ul class="nav py-2">
+    <li class="nav-item">
+      <a
+        class="nav-item"
+        type="button"
+        mdbBtn
+        color="default"
+        routerLink="./add"
+        >Add Materials</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-item" type="button" mdbBtn color="info" routerLink="./view"
+        >View Materials</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-item"
+        type="button"
+        mdbBtn
+        color="danger"
+        routerLink="./allocation"
+        >Material Allocation</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-item"
+        type="button"
+        mdbBtn
+        color="warning"
+        routerLink="./consumption"
+        >Material Consumption</a
+      >
+    </li>
+  </ul>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

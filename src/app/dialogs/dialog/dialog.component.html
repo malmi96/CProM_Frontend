@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{ data.inputLabel }}</mat-label>
+    <input matInput type="text" [(ngModel)]="newValue" name="newValue" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mdbBtn color="danger" (click)="onCancel()">Cancel</button>
+  <button mdbBtn color="primary" (click)="onSave(newValue)" cdkFocusInitial>
+    Save
+  </button>
+</div>

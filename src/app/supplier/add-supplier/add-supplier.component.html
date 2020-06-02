@@ -1,0 +1,102 @@
+<!--Add Supplier Card-->
+<div>
+  <form>
+    <div class="ml-2" style="width: 20cm;">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>Add New Supplier</h2>
+          </mdb-card-title>
+          <mdb-card-text>
+            <form
+              #addSupplierForm="ngForm"
+              (ngSubmit)="submit(addSupplierForm)"
+            >
+              <div class="md-form">
+                <input
+                  mdbInput
+                  required
+                  type="text"
+                  name="supplierName"
+                  class="form-control"
+                  ngModel
+                  #supplierName="ngModel"
+                />
+                <label for="supplierName" class="">Supplier Name</label>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  ngModel
+                  #email="ngModel"
+                />
+                <label for="email" class="">Email</label>
+              </div>
+
+              <div class="md-form">
+                <input
+                  mdbInput
+                  type="text"
+                  name="address"
+                  class="form-control"
+                  ngModel
+                  #address="ngModel"
+                />
+                <label for="address" class="">Address</label>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  type="number"
+                  name="contactNo"
+                  class="form-control-sm"
+                  ngModel
+                  #contactNo="ngModel"
+                />
+                <label for="contactNo" class="">Contact Number</label>
+              </div>
+              <div class="row">
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    type="number"
+                    name="supplyDelay"
+                    class="form-control-sm"
+                    ngModel
+                    #supplyDelay="ngModel"
+                  />
+                  <label for="supplyDelay" class="">Supply Delay in Days</label>
+                </div>
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    type="number"
+                    name="reorderDelay"
+                    class="form-control-sm"
+                    ngModel
+                    #reorderDelay="ngModel"
+                  />
+                  <label for="reorderDelay" class=""
+                    >Reorder Delay in Days</label
+                  >
+                </div>
+              </div>
+              <button
+                mdbBtn
+                class="float-right"
+                type="submit"
+                color="success"
+                mdbWavesEffect
+              >
+                Add Supplier
+              </button>
+            </form>
+          </mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </form>
+</div>
