@@ -1,0 +1,216 @@
+<div class="main-div">
+  <div *ngIf="project">
+    <mat-card class="details">
+      <mat-card-title
+        >{{ project.projectName }}
+        <button mat-button color="warn" (click)="onEdit()">Edit Details</button>
+        <button
+          mat-icon-button
+          class="float-right"
+          color="warn"
+          aria-label="Example icon button with a delete icon"
+          (click)="onDelete()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-title>
+      <label style="background-color: yellow;">{{
+        project.projectStatus
+      }}</label>
+      <mat-card-content>
+        <label>{{ project.projectOwner.customerName }}</label>
+        <br />
+        <label>{{ project.projectLocation }}</label>
+        <br />
+        <label>Start Date: {{ project.startedDate | date }}</label>
+        <br />
+        <label>End Date: {{ project.projectedEndingDate | date }}</label>
+        <br />
+        <button
+          type="button"
+          mdbBtn
+          color="success"
+          size="sm"
+          *ngIf="restageNames.length < 4"
+          (click)="onStage()"
+        >
+          Add Stage
+        </button>
+        <div *ngIf="stages" class="button-group">
+          <button
+            mat-raised-button
+            (click)="onFoundation()"
+            style="background-color: darkorange;"
+            *ngIf="restageNames.includes('Foundation')"
+          >
+            Foundation
+          </button>
+          <button
+            mat-raised-button
+            (click)="onBrickWork()"
+            color="primary"
+            style="background-color: crimson; margin-left: 1ex;"
+            *ngIf="restageNames.includes('Brick Work')"
+          >
+            Brick Work
+          </button>
+          <button
+            mat-raised-button
+            (click)="onRoofing()"
+            color="primary"
+            style="background: darkgreen; margin-left: 1ex;"
+            *ngIf="restageNames.includes('Ceiling/Roofing')"
+          >
+            Ceiling/Roofing
+          </button>
+          <button
+            mat-raised-button
+            (click)="onPainting()"
+            color="primary"
+            style="background-color: darkslateblue; margin-left: 1ex;"
+            *ngIf="restageNames.includes('Painting')"
+          >
+            Painting/Finishing
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <div class="stage">
+      <app-stage-component *ngIf="stage"> </app-stage-component>
+      <app-foundation-stage *ngIf="foundation"></app-foundation-stage>
+      <app-brickwork-stage *ngIf="brickWork"></app-brickwork-stage>
+      <app-roofing-stage *ngIf="roofing"></app-roofing-stage>
+      <app-painting-stage *ngIf="painting"></app-painting-stage>
+    </div>
+  </div>
+
+  <div class="edit" *ngIf="project && edit === true">
+    <mdb-card>
+      <mdb-card-body>
+        <mdb-card-title>
+          <h2></h2>
+        </mdb-card-title>
+        <mdb-card-text>
+          <form [formGroup]="editProjectForm" (ngSubmit)="submit()">
+            <mat-form-field style="width: 500px !important;">
+              <mat-label>Customer Name</mat-label>
+              <input
+                required
+                type="text"
+                aria-label="Number"
+                matInput
+                formControlName="customerName"
+                [formControl]="customerControl"
+                [matAutocomplete]="autoCustomer"
+              />
+              <mat-autocomplete #autoCustomer="matAutocomplete">
+                <mat-option
+                  *ngFor="let customerName of filteredCustomerNames | async"
+                  [value]="customerName"
+                >
+                  {{ customerName }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="customerControl.invalid">{{
+                getErrorMessage()
+              }}</mat-error>
+            </mat-form-field>
+            <div class="row">
+              <mat-form-field class="ml-3">
+                <mat-label>Enter City Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Nearest city name"
+                  type="text"
+                  formControlName="city"
+                  (keyup)="(0)"
+                />
+              </mat-form-field>
+              <mat-form-field class="ml-3">
+                <mat-label>Project Name</mat-label>
+                <input
+                  matInput
+                  required
+                  type="text"
+                  formControlName="projectName"
+                  value="{{ editProjectForm.get('city').value + ' - site' }}"
+                  [formControl]="editProjectForm.get('projectName')"
+                />
+                <mat-error *ngIf="editProjectForm.get('projectName').invalid">{{
+                  getErrorMessage()
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field style="width: 500px !important;">
+              <mat-label>Project Location</mat-label>
+              <input
+                matInput
+                formControlName="projectLocation"
+                [formControl]="editProjectForm.get('projectLocation')"
+                required
+              />
+              <mat-error
+                *ngIf="editProjectForm.get('projectLocation').invalid"
+                >{{ getErrorMessage() }}</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field style="width: 500px !important;">
+              <mat-label>Starting Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="startingDate"
+              />
+              <mat-error *ngIf="editProjectForm.get('startingDate').invalid">{{
+                getErrorMessage()
+              }}</mat-error>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field style="width: 500px !important;">
+              <mat-label>Ending Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endDatePicker"
+                formControlName="endingDate"
+              />
+              <mat-error *ngIf="editProjectForm.get('endingDate').invalid">{{
+                getErrorMessage()
+              }}</mat-error>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="ml-3">
+              <mat-label>Project Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="float-right ml-5">
+              <button mdbBtn type="submit" color="success" mdbWavesEffect>
+                Update Project
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                color="danger"
+                mdbWavesEffect
+                (click)="onCancel()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </mdb-card-text>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>

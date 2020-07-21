@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+
+import { InfoDialogComponent } from 'src/app/dialogs/info/info-dialog/info-dialog.component';
 
 @Component({
   templateUrl: './login.component.html',
@@ -10,9 +13,21 @@ export class LoginComponent implements OnInit {
   userTypes: string[];
   isLoading = false;
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, public dialog: MatDialog) {}
   ngOnInit() {
     this.userTypes = ['Customer', 'Employee'];
+  }
+
+  openInfo(): void {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      data: {
+        title: 'Forgot Your Password??',
+        // tslint:disable-next-line: max-line-length
+        info: 'Please contact Admin or Sales Manager',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   submit(loginForm: NgForm) {

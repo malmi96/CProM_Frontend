@@ -1,0 +1,19 @@
+<div class="top">
+  <a class="text-success" (click)="addUser()">
+    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+    <label class="ml-2" style="font-size: large;">Add New User</label>
+  </a>
+</div>
+
+<div class="table-div">
+  <h3>Select User Type to View Details</h3>
+  <mat-radio-group aria-label="Select an option" ngModel #userRadio="ngModel">
+    <mat-radio-button value="1" routerLink="viewCustomer"
+      >Customers</mat-radio-button
+    >
+    <mat-radio-button value="2" routerLink="viewEmployee"
+      >Employees</mat-radio-button
+    >
+  </mat-radio-group>
+  <router-outlet></router-outlet>
+</div>

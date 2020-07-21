@@ -1,0 +1,12 @@
+.top {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+.table-div {
+  margin-top: auto;
+  margin-left: 1rem;
+  width: 150ex;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

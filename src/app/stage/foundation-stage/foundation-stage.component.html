@@ -1,0 +1,69 @@
+<mat-card *ngIf="project && element">
+  <mat-card-title>Stage Details</mat-card-title>
+  <mat-card-content>
+    <h1>Foundation Stage</h1>
+    <form [formGroup]="foundationForm" (ngSubmit)="submit()">
+      <input hidden formControlName="elementid" />
+      <input hidden formControlName="projectName" />
+      <mat-form-field style="width: 250px !important;">
+        <mat-label>Stage Name</mat-label>
+        <input matInput formControlName="stageName" />
+      </mat-form-field>
+      <mat-form-field style="width: 500px !important;">
+        <input
+          type="text"
+          placeholder="Stage Supervisor"
+          aria-label="Number"
+          matInput
+          formControlName="labourName"
+          [formControl]="labourControl"
+          [matAutocomplete]="autoLabour"
+        />
+        <mat-autocomplete #autoLabour="matAutocomplete">
+          <mat-option
+            *ngFor="let labourName of filteredLabourNames | async"
+            [value]="labourName"
+          >
+            {{ labourName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field style="width: 500px !important;">
+        <mat-label>Starting Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="startingDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field style="width: 500px !important;">
+        <mat-label>Ending Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endDatePicker"
+          formControlName="endingDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="ml-3">
+        <mat-label>Project Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Update</button>
+      <button mat-raised-button class="ml-3" color="warn" type="button">
+        Remove Stage
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

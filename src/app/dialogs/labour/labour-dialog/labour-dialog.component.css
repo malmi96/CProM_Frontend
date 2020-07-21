@@ -1,0 +1,11 @@
+.mat-card {
+  width: 13cm;
+}
+
+.mat-form-field {
+  width: 60ex;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

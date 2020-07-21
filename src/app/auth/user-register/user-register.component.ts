@@ -8,14 +8,17 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./user-register.component.scss'],
 })
 export class UserRegisterComponent implements OnInit {
-  constructor(private router: Router) {}
-
   userTypes: string[];
+  constructor(private router: Router) {}
   ngOnInit() {}
 
   onDataAdded(value: any) {}
 
   submit(registerForm: NgForm) {
     console.log(registerForm.value);
+  }
+
+  viewUser() {
+    this.router.navigate(['/viewUser']);
   }
 }

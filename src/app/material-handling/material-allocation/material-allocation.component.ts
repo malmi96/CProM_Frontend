@@ -8,13 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class MaterialAllocationComponent implements OnInit {
   constructor() {}
 
-  projects: string[] = ['Kottawa-site', 'Malabe-site', 'Moratuwa-site'];
-  materials: string[] = ['Sand', 'Bricks', 'Cement'];
+  projects: string[] = ['Kottawa-site', 'Kelaniya-site', 'Moratuwa-site'];
+  materials: string[] = ['Sand', 'Bricks-9*6*3', 'Insee-Cement-50kg'];
   units: string[] = [
-    '50kg Pkt',
-    'cube(100cuft)',
-    '19.2ft',
-    '12ft',
+    'Packet',
+    'cube',
     'units',
     'g',
     'kg',

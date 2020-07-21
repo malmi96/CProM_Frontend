@@ -1,0 +1,113 @@
+<!--Add Project Card-->
+
+<div class="ml-2" style="width: 15cm;">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h2>Add New Project</h2>
+      </mdb-card-title>
+      <mdb-card-text>
+        <form [formGroup]="addProjectForm" (ngSubmit)="submit()">
+          <mat-form-field style="width: 500px !important;">
+            <input
+              type="text"
+              placeholder="Customer Name"
+              aria-label="Number"
+              matInput
+              formControlName="customerName"
+              [formControl]="customerControl"
+              [matAutocomplete]="autoCustomer"
+            />
+            <mat-autocomplete #autoCustomer="matAutocomplete">
+              <mat-option
+                *ngFor="let customerName of filteredCustomerNames | async"
+                [value]="customerName"
+              >
+                {{ customerName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <div class="row">
+            <div class="md-form ml-3">
+              <input
+                mdbInput
+                placeholder="nearest city name"
+                type="text"
+                formControlName="city"
+                class="form-control-sm"
+                (keyup)="(0)"
+              />
+              <label for="city" class="">Enter City Name</label>
+            </div>
+            <div class="md-form ml-5">
+              <input
+                mdbInput
+                required
+                type="text"
+                formControlName="projectName"
+                value="{{ addProjectForm.get('city').value + ' - site' }}"
+                class="form-control"
+              />
+              <label for="projectName" class="">Project Name</label>
+            </div>
+            <a (click)="openInfo()">
+              <mdb-icon fas icon="info-circle"></mdb-icon>
+            </a>
+            <mat-form-field class="ml-3" style="width: 500px !important;">
+              <mat-label>Project Location</mat-label>
+              <input matInput formControlName="projectLocation" />
+            </mat-form-field>
+            <mat-form-field class="ml-3" style="width: 500px !important;">
+              <mat-label>Starting Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="startingDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="ml-3" style="width: 500px !important;">
+              <mat-label>Ending Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endDatePicker"
+                formControlName="endingDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="ml-3">
+              <mat-label>Project Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="float-right ml-5">
+              <button
+                mdbBtn
+                type="button"
+                color="danger"
+                mdbWavesEffect
+                (click)="onReset()"
+              >
+                Clear
+              </button>
+              <button mdbBtn type="submit" color="success" mdbWavesEffect>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </form>
+      </mdb-card-text>
+    </mdb-card-body>
+  </mdb-card>
+</div>

@@ -1,12 +1,12 @@
 <!-- Editable table -->
-<div class="card">
+<div class="card" *ngIf="materials">
   <h2 class="card-header text-center font-weight-bold text-uppercase py-4">
     Details of the Materials
   </h2>
   <div class="card-body">
     <div id="table" class="table-editable">
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="add()">
+        <a class="text-success">
           <mdb-icon fas icon="plus" size="2x"></mdb-icon>
         </a>
       </span>
@@ -14,21 +14,29 @@
         class="table table-bordered table-responsive-md table-striped text-center"
       >
         <tr>
-          <th class="text-center">Material Type</th>
-          <th class="text-center">Current Quantity</th>
+          <th class="text-center">Material Name</th>
+          <th class="text-center">Category</th>
+          <th class="text-center">Quantity</th>
           <th class="text-center">Unit</th>
           <th class="text-center">Unit Cost(Rs.)</th>
-          <th class="text-center">Critical Level</th>
           <th class="text-center">Update</th>
           <th class="text-center">Remove</th>
         </tr>
-        <tr *ngFor="let person of personList; let id = index">
+        <tr *ngFor="let material of materials; let id = index">
           <td>
             <span
-              (keyup)="changeValue(id, 'materialType', $event)"
-              (blur)="updateList(id, 'materialType', $event)"
+              (keyup)="changeValue(id, 'materialName', $event)"
+              (blur)="updateList(id, 'materialName', $event)"
               contenteditable="true"
-              >{{ person.materialType }}</span
+              >{{ material.materialName }}</span
+            >
+          </td>
+          <td>
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'materialCategory', $event)"
+              (blur)="updateList(id, 'materialCategory', $event)"
+              >{{ material.materialCategory }}</span
             >
           </td>
           <td>
@@ -36,7 +44,7 @@
               contenteditable="true"
               (keyup)="changeValue(id, 'quantity', $event)"
               (blur)="updateList(id, 'quantity', $event)"
-              >{{ person.quantity }}</span
+              >{{ material.quantity }}</span
             >
           </td>
           <td>
@@ -44,7 +52,7 @@
               contenteditable="true"
               (keyup)="changeValue(id, 'unit', $event)"
               (blur)="updateList(id, 'unit', $event)"
-              >{{ person.unit }}</span
+              >{{ material.unit }}</span
             >
           </td>
           <td>
@@ -52,15 +60,7 @@
               contenteditable="true"
               (keyup)="changeValue(id, 'unitCost', $event)"
               (blur)="updateList(id, 'unitCost', $event)"
-              >{{ person.unitCost }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'criticalLevel', $event)"
-              (blur)="updateList(id, 'criticalLevel', $event)"
-              >{{ person.criticalLevel }}</span
+              >{{ material.unitCost }}</span
             >
           </td>
           <td>

@@ -6,10 +6,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Employee } from '../../interfaces/user';
 import { Customer } from '../../interfaces/user';
 import { Login } from '../../interfaces/user';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ReturnStatement } from '@angular/compiler';
 import { Supplier } from 'src/app/interfaces/supplier';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,64 @@ export class UserService {
   getUserListener() {
     return this.userListener.asObservable();
   }
+  // Get User Request
+
+  getCustomer(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(
+      'http://localhost:5000/api/users/customer/get'
+    );
+  }
+
+  getCustomerById(id: string): Observable<Customer[]> {
+    return this.http.get<Customer[]>(
+      `http://localhost:5000/api/users/customer/${id}`
+    );
+  }
+
+  getEmployeeById(id: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(
+      `http://localhost:5000/api/users/employee/${id}`
+    );
+  }
+
+  getEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(
+      'http://localhost:5000/api/users/employee/get'
+    );
+  }
+
+  // Update User
+
+  updateEmployee(id: string, data: any): Observable<any> {
+    console.log(data);
+    return this.http.patch(
+      `http://localhost:5000/api/users/employee/${id}`,
+      data
+    );
+  }
+
+  updateCustomer(id: string, data: any): Observable<any> {
+    return this.http.patch(
+      `http://localhost:5000/api/users/customer/${id}`,
+      data
+    );
+  }
+
+  // Delete User
+
+  deleteEmployee(id: string): Observable<Employee[]> {
+    return this.http.delete<Employee[]>(
+      `http://localhost:5000/api/users/employee/${id}`
+    );
+  }
+
+  deleteCustomer(id: string): Observable<Customer[]> {
+    return this.http.delete<Customer[]>(
+      `http://localhost:5000/api/users/customer/${id}`
+    );
+  }
+
+  // Post Request
 
   addCustomer(
     customerName: string,
@@ -75,6 +134,7 @@ export class UserService {
       )
       .subscribe((responseData) => {
         console.log(responseData);
+        alert('User added successfully');
         this.customers.push(customer);
         this.customerUpdated.next([...this.customers]);
       });
@@ -106,6 +166,7 @@ export class UserService {
       )
       .subscribe((responseData) => {
         console.log(responseData);
+        alert('User added successfully');
         this.employees.push(employee);
         this.employeeUpdated.next([...this.employees]);
       });

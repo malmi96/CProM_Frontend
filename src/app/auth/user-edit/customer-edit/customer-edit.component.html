@@ -1,0 +1,148 @@
+<div>
+  <mat-card *ngIf="customer">
+    <form #customerUpdate="ngForm" (submit)="onUpdate(customerUpdate)">
+      <div class="md-form ml-4 mr-4">
+        <mat-card-title>
+          <h3 style="font-size: larger;">{{ customer.customerName }}</h3>
+        </mat-card-title>
+        <div class="row"></div>
+        <div class="md-form form-sm">
+          <input
+            mdbInput
+            type="text"
+            name="customerName"
+            class="form-control form-control-sm"
+            ngModel="{{ customer.customerName }}"
+            #fullName="ngModel"
+            placeholder="{{ customer.customerName }}"
+          />
+          <label for="customerName">Full Name</label>
+        </div>
+        <div class="md-form form-sm">
+          <input
+            mdbInput
+            type="text"
+            name="nic"
+            class="form-control form-control-sm"
+            ngModel="{{ customer.nic }}"
+            #nic="ngModel"
+            placeholder="{{ customer.nic }}"
+          />
+          <label for="nic" class="">NIC</label>
+        </div>
+        <div class="md-form form-sm">
+          <input
+            mdbInput
+            mdbValidate
+            required
+            type="email"
+            name="email"
+            class="form-control form-control-sm"
+            ngModel="{{ customer.email }}"
+            #email="ngModel"
+            placeholder="{{ customer.email }}"
+          />
+          <label for="email">Email</label>
+          <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
+            >Invalid email</mdb-error
+          >
+          <mdb-success *ngIf="email.valid && (email.dirty || email.touched)"
+            >Valid</mdb-success
+          >
+        </div>
+
+        <div class="md-form form-sm">
+          <input
+            mdbInput
+            type="text"
+            name="address"
+            class="form-control form-control-sm"
+            ngModel="{{ customer.address }}"
+            #address="ngModel"
+            placeholder="{{ customer.address }}"
+          />
+          <label for="address" class="">Address</label>
+        </div>
+        <div class="md-form form-sm">
+          <input
+            mdbInput
+            type="number"
+            name="contactNo"
+            class="form-control form-control-sm"
+            ngModel="{{ customer.contactNo }}"
+            #contactNo="ngModel"
+            placeholder="{{ customer.contactNo }}"
+          />
+          <label for="contactNo" class="">Contact Number</label>
+        </div>
+        <button
+          mat-button
+          type="button"
+          color="warn"
+          style="width: 50ex !important; margin-bottom: 1rem !important;"
+          (click)="onChangePassword()"
+        >
+          Change Password
+        </button>
+        <div class="form-inline" *ngIf="changePassword === true">
+          <div class="md-form form-sm form-inline mt-0">
+            <input
+              mdbInput
+              type="password"
+              name="password"
+              class="form-control form-control-sm"
+              minlength="8"
+              ngModel
+              #password="ngModel"
+            />
+            <label for="password">Password</label>
+            <mdb-error
+              *ngIf="password.invalid && (password.dirty || password.touched)"
+              >Please enter 8 characters</mdb-error
+            >
+            <mdb-success
+              *ngIf="password.valid && (password.dirty || password.touched)"
+              >Valid password</mdb-success
+            >
+          </div>
+          <div class="md-form form-sm form-inline ml-4 mt-0">
+            <input
+              mdbInput
+              mdbValidate
+              required
+              type="password"
+              name="confirmPassword"
+              class="form-control form-control-sm pull-right"
+              ngModel
+              #confirmPassword="ngModel"
+            />
+            <label for="confirmPassword">Confirm Password</label>
+            <mdb-error *ngIf="message === true"
+              >Passwords do not match</mdb-error
+            >
+          </div>
+        </div>
+        <div class="float-right">
+          <button
+            mat-raised-button
+            type="button"
+            color="warn"
+            style="width: 20ex !important;"
+            (click)="onDelete()"
+          >
+            Delete User
+          </button>
+          <button
+            mat-raised-button
+            class="ml-2"
+            color="primary"
+            type="submit"
+            style="width: 20ex !important;"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

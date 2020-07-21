@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,14 +11,19 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 import { from } from 'rxjs';
 import { UserRegisterComponent } from './auth/user-register/user-register.component';
@@ -43,6 +49,38 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { DialogService } from './services/dialog/dialog.service';
 import { SupplierService } from './services/supplier/supplier.service';
+import { PaymentComponent } from './payments/payment/payment.component';
+import { InfoDialogComponent } from './dialogs/info/info-dialog/info-dialog.component';
+import { MaterialService } from './services/material/material.service';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { CustomerPaymentsComponent } from './payments/customer/customer-payments/customer-payments.component';
+import { MaterialPaymentsComponent } from './payments/material/material-payments/material-payments.component';
+import { MachineryPaymentsComponent } from './payments/machinery/machinery-payments/machinery-payments.component';
+import { UtilityPaymentsComponent } from './payments/utility/utility-payments/utility-payments.component';
+import { LabourPaymentsComponent } from './payments/labour/labour-payments/labour-payments.component';
+import { ToolsPaymentsComponent } from './payments/tools/tools-payments/tools-payments.component';
+import { ProjectComponent } from './project/project/project.component';
+import { AddProjectComponent } from './project/add-project/add-project.component';
+import { ViewProjectComponent } from './project/view-project/view-project.component';
+import { CustomerViewComponent } from './auth/user-view/customer-view/customer-view.component';
+import { EmployeeViewComponent } from './auth/user-view/employee-view/employee-view.component';
+import { UserViewComponent } from './auth/user-view/user-view.component';
+import { EmployeeEditComponent } from './auth/user-edit/employee-edit/employee-edit.component';
+import { UserEditComponent } from './auth/user-edit/user-edit.component';
+import { CustomerEditComponent } from './auth/user-edit/customer-edit/customer-edit.component';
+import { ProjectService } from './services/project/project.service';
+import { EditProjectComponent } from './project/edit-project/edit-project.component';
+import { StageComponentComponent } from './stage/stage-component/stage-component.component';
+import { LabourDialogComponent } from './dialogs/labour/labour-dialog/labour-dialog.component';
+import { DataAddDialogComponent } from './dialogs/success/data-add-dialog/data-add-dialog.component';
+import { StageService } from './services/stage/stage.service';
+import { FoundationStageComponent } from './stage/foundation-stage/foundation-stage.component';
+import { BrickworkStageComponent } from './stage/brickwork-stage/brickwork-stage.component';
+import { RoofingStageComponent } from './stage/roofing-stage/roofing-stage.component';
+import { PaintingStageComponent } from './stage/painting-stage/painting-stage.component';
 
 @NgModule({
   declarations: [
@@ -69,9 +107,37 @@ import { SupplierService } from './services/supplier/supplier.service';
     ViewLabourComponent,
     DashboardComponent,
     DialogComponent,
+    PaymentComponent,
+    InfoDialogComponent,
+    CustomerPaymentsComponent,
+    MaterialPaymentsComponent,
+    MachineryPaymentsComponent,
+    UtilityPaymentsComponent,
+    LabourPaymentsComponent,
+    ToolsPaymentsComponent,
+    ProjectComponent,
+    AddProjectComponent,
+    ViewProjectComponent,
+    CustomerViewComponent,
+    EmployeeViewComponent,
+    UserViewComponent,
+    EmployeeEditComponent,
+    UserEditComponent,
+    CustomerEditComponent,
+    EditProjectComponent,
+    StageComponentComponent,
+    LabourDialogComponent,
+    DataAddDialogComponent,
+    FoundationStageComponent,
+    BrickworkStageComponent,
+    RoofingStageComponent,
+    PaintingStageComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -79,19 +145,34 @@ import { SupplierService } from './services/supplier/supplier.service';
     MatInputModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
+    MatTableModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
   ],
 
-  entryComponents: [DialogComponent],
+  entryComponents: [
+    DialogComponent,
+    InfoDialogComponent,
+    LabourDialogComponent,
+    DataAddDialogComponent,
+  ],
   providers: [
     UserService,
     DialogService,
     SupplierService,
+    MaterialService,
+    ProjectService,
+    StageService,
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

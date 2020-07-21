@@ -21,6 +21,24 @@ import { ViewLabourComponent } from './labour/view-labour/view-labour.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
+import { PaymentComponent } from './payments/payment/payment.component';
+import { CustomerPaymentsComponent } from './payments/customer/customer-payments/customer-payments.component';
+import { MaterialPaymentsComponent } from './payments/material/material-payments/material-payments.component';
+import { MachineryPaymentsComponent } from './payments/machinery/machinery-payments/machinery-payments.component';
+import { UtilityPaymentsComponent } from './payments/utility/utility-payments/utility-payments.component';
+import { LabourPaymentsComponent } from './payments/labour/labour-payments/labour-payments.component';
+import { ToolsPaymentsComponent } from './payments/tools/tools-payments/tools-payments.component';
+import { ProjectComponent } from './project/project/project.component';
+import { AddProjectComponent } from './project/add-project/add-project.component';
+import { ViewProjectComponent } from './project/view-project/view-project.component';
+import { CustomerViewComponent } from './auth/user-view/customer-view/customer-view.component';
+import { EmployeeViewComponent } from './auth/user-view/employee-view/employee-view.component';
+import { UserViewComponent } from './auth/user-view/user-view.component';
+import { EmployeeEditComponent } from './auth/user-edit/employee-edit/employee-edit.component';
+import { UserEditComponent } from './auth/user-edit/user-edit.component';
+import { CustomerEditComponent } from './auth/user-edit/customer-edit/customer-edit.component';
+import { EditProjectComponent } from './project/edit-project/edit-project.component';
+import { StageComponentComponent } from './stage/stage-component/stage-component.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,12 +48,55 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'project',
+    component: ProjectComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'add', component: AddProjectComponent },
+      { path: 'view', component: ViewProjectComponent },
+    ],
+  },
+  {
+    path: 'stage',
+    component: StageComponentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'editProject/:id',
+    component: EditProjectComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'userRegister',
     component: UserRegisterComponent,
     canActivate: [AuthGuard, RoleGuard],
     children: [
       { path: 'customer', component: CustomerRegisterComponent },
       { path: 'employee', component: EmployeeRegisterComponent },
+    ],
+  },
+  {
+    path: 'viewUser',
+    component: UserViewComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    children: [
+      {
+        path: 'viewEmployee',
+        component: EmployeeViewComponent,
+      },
+      {
+        path: 'viewCustomer',
+        component: CustomerViewComponent,
+      },
+    ],
+  },
+  {
+    path: 'userEdit',
+    component: UserEditComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    children: [
+      { path: ':id', component: EmployeeEditComponent },
+      { path: 'customer/:id', component: CustomerEditComponent },
     ],
   },
   {
@@ -74,6 +135,19 @@ const routes: Routes = [
     children: [
       { path: 'add', component: AddLabourComponent },
       { path: 'view', component: ViewLabourComponent },
+    ],
+  },
+  {
+    path: 'payments',
+    component: PaymentComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'customerPayments', component: CustomerPaymentsComponent },
+      { path: 'materialPayments', component: MaterialPaymentsComponent },
+      { path: 'machineryPayments', component: MachineryPaymentsComponent },
+      { path: 'utilityPayments', component: UtilityPaymentsComponent },
+      { path: 'labourPayments', component: LabourPaymentsComponent },
+      { path: 'toolsPayments', component: ToolsPaymentsComponent },
     ],
   },
 ];

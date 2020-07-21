@@ -32,7 +32,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/project/view"
           >Projects</a
         >
       </li>
@@ -47,7 +47,7 @@
           type="button"
           class="nav-link dropdown-toggle waves-light"
           mdbWavesEffect
-          routerLink="/userRegister"
+          routerLink="/userRegister/customer"
         >
           Users</a
         >
@@ -56,18 +56,17 @@
           class="dropdown-menu dropdown dropdown-primary"
           role="menu"
         >
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
-            >Action</a
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/userRegister/customer"
+            >Add Users</a
           >
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
-            >Another action</a
-          >
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
-            >Something else here</a
-          >
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#"
-            >Separated link</a
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            routerLink="/viewUser/viewCustomer"
+            >View Users</a
           >
         </div>
       </li>
@@ -265,7 +264,7 @@
           type="button"
           class="nav-link dropdown-toggle waves-light"
           mdbWavesEffect
-          routerLink=""
+          routerLink="/payments"
         >
           Payments</a
         >

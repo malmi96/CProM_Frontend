@@ -1,0 +1,108 @@
+<!--Add Labour Payments Card-->
+<div>
+  <form>
+    <div style="width: 20cm;">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>Labour Payments</h2>
+          </mdb-card-title>
+          <mdb-card-text>
+            <form #materialPaymentsForm="ngForm">
+              <div>
+                <mat-form-field style="width: 500px !important;">
+                  <input
+                    type="text"
+                    placeholder="Labour Name"
+                    aria-label="Name"
+                    matInput
+                    [formControl]="labourControl"
+                    [matAutocomplete]="autoLabour"
+                  />
+                  <mat-autocomplete #autoLabour="matAutocomplete">
+                    <mat-option
+                      *ngFor="let labour of filteredLabours | async"
+                      [value]="labour"
+                    >
+                      {{ labour }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field class="ml-3">
+                  <input
+                    type="text"
+                    placeholder="Project Name"
+                    aria-label="Number"
+                    matInput
+                    [formControl]="projectControl"
+                    [matAutocomplete]="autoProject"
+                  />
+                  <mat-autocomplete #autoProject="matAutocomplete">
+                    <mat-option
+                      *ngFor="let project of filteredProjects | async"
+                      [value]="project"
+                    >
+                      {{ project }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="ml-5">
+                  <mat-label>Select Stage</mat-label>
+                  <mat-select name="stage" ngModel #stage="ngModel">
+                    <mat-option *ngFor="let stage of stages" [value]="stage">
+                      {{ stage }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field style="width: 500px !important;">
+                <mat-label>Payment Date</mat-label>
+                <input matInput [matDatepicker]="picker" />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <div class="row">
+                <mat-form-field class="ml-3">
+                  <mat-label>Amount(Rs.)</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    name="amount"
+                    ngModel
+                    #amount="ngModel"
+                  />
+                </mat-form-field>
+                <mat-form-field class="ml-5">
+                  <mat-label>Payment Type</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let type of types" [value]="type">
+                      {{ type }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field style="width: 500px !important;">
+                <mat-label>Description</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="description"
+                  ngModel
+                  #description="ngModel"
+                />
+              </mat-form-field>
+              <div class="float-right">
+                <button mat-raised-button color="primary">Save Payment</button>
+              </div>
+            </form>
+          </mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </form>
+</div>
