@@ -1,0 +1,92 @@
+<!--Edit Supplier Card-->
+
+<div class="ml-2" style="width: 20cm;" *ngIf="supplier">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h2>Supplier Details</h2>
+      </mdb-card-title>
+      <mdb-card-text>
+        <form [formGroup]="supplierEditForm" (ngSubmit)="submit(supplier._id)">
+          <div class="md-form">
+            <input
+              mdbInput
+              required
+              type="text"
+              formControlName="supplierName"
+              class="form-control"
+            />
+            <label for="supplierName" class="">Supplier Name</label>
+          </div>
+          <div class="md-form">
+            <input
+              mdbInput
+              type="email"
+              formControlName="email"
+              class="form-control"
+            />
+            <label for="email" class="">Email</label>
+          </div>
+
+          <div class="md-form">
+            <input
+              mdbInput
+              type="text"
+              formControlName="address"
+              class="form-control"
+            />
+            <label for="address" class="">Address</label>
+          </div>
+          <div class="md-form">
+            <input
+              mdbInput
+              type="number"
+              formControlName="contactNo"
+              class="form-control-sm"
+            />
+            <label for="contactNo" class="">Contact Number</label>
+          </div>
+          <div class="row">
+            <div class="md-form ml-3">
+              <input
+                mdbInput
+                type="number"
+                formControlName="supplyDelay"
+                class="form-control-sm"
+              />
+              <label for="supplyDelay" class="">Supply Delay in Days</label>
+            </div>
+            <div class="md-form ml-3">
+              <input
+                mdbInput
+                type="number"
+                formControlName="reorderDelay"
+                class="form-control-sm"
+              />
+              <label for="reorderDelay" class="">Reorder Delay in Days</label>
+            </div>
+          </div>
+          <button
+            mdbBtn
+            class="float-right"
+            type="submit"
+            color="success"
+            mdbWavesEffect
+          >
+            Update Supplier
+          </button>
+          <button
+            mdbBtn
+            class="float-right"
+            type="button"
+            color="danger"
+            mdbWavesEffect
+            (click)="onDelete(supplier._id)"
+          >
+            Remove Supplier
+          </button>
+        </form>
+      </mdb-card-text>
+    </mdb-card-body>
+  </mdb-card>
+</div>

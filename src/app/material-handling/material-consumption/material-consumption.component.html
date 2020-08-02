@@ -1,95 +1,113 @@
-<!--Material Allocation Card-->
-<div>
-  <form>
-    <div class="ml-2" style="width: 20cm;">
-      <mdb-card>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h2>Material Consumption</h2>
-          </mdb-card-title>
-          <mdb-card-text>
-            <form>
-              <div class="row">
-                <div class="md-form ml-3">
-                  <select
-                    class="browser-default custom-select-sm"
-                    name="projectName"
-                  >
-                    <option selected>Project Name</option>
-                    <option
-                      *ngFor="let project of projects"
-                      [value]="project"
-                      >{{ project }}</option
-                    >
-                  </select>
-                </div>
-                <div class="md-form ml-3">
-                  <select
-                    class="browser-default custom-select-sm"
-                    name="stageName"
-                  >
-                    <option selected>Stage Name</option>
-                    <option *ngFor="let stage of stages" [value]="stage">{{
-                      stage
-                    }}</option>
-                  </select>
-                </div>
-                <div class="md-form ml-3">
-                  <select
-                    class="browser-default custom-select-sm"
-                    name="materialType"
-                  >
-                    <option selected>Material Type</option>
-                    <option
-                      *ngFor="let material of materials"
-                      [value]="material"
-                      >{{ material }}</option
-                    >
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="md-form ml-3">
-                  <input
-                    mdbInput
-                    type="number"
-                    name="quantity"
-                    class="form-control-sm"
-                  />
-                  <label for="quantity" class="">Quantity</label>
-                  <select class="browser-default custom-select-sm" type="input">
-                    <option selected>Select unit</option>
-                    <option *ngFor="let unit of units" [value]="unit">{{
-                      unit
-                    }}</option>
-                  </select>
-                </div>
-              </div>
+<!--Material Consumption Card-->
 
-              <div>
-                <mat-form-field>
-                  <mat-label>Choose a date</mat-label>
-                  <input matInput [matDatepicker]="picker" />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </form>
-          </mdb-card-text>
+<div class="ml-2" style="width: 20cm;">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title class="row">
+        <h2>Material Consumption</h2>
+        <div class="float-right">
+          <button
+            mdbBtn
+            class="btnOkay"
+            size="sm"
+            color="primary"
+            (click)="onView()"
+          >
+            View Material Consumption
+          </button>
+        </div>
+      </mdb-card-title>
+      <mdb-card-text>
+        <form [formGroup]="materialConsumptionForm" (ngSubmit)="submit()">
+          <div class="ml-2">
+            <mat-form-field style="width: 500px !important;">
+              <input
+                type="text"
+                placeholder="Project Name"
+                aria-label="Number"
+                matInput
+                formControlName="projectName"
+                [formControl]="projectControl"
+                [matAutocomplete]="autoProject"
+              />
+              <mat-autocomplete
+                #autoProject="matAutocomplete"
+                (optionSelected)="onProjectChange($event.option.value)"
+              >
+                <mat-option
+                  *ngFor="let projectName of filteredProjectNames | async"
+                  [value]="projectName"
+                >
+                  {{ projectName }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field *ngIf="stages" style="width: 500px !important;">
+              <mat-label>Stage Name</mat-label>
+              <mat-select formControlName="stageName">
+                <mat-option
+                  *ngFor="let stage of stages"
+                  [value]="stage.stageName"
+                >
+                  {{ stage.stageName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width: 500px !important;">
+              <input
+                type="text"
+                placeholder="Material Name"
+                aria-label="Number"
+                matInput
+                formControlName="materialName"
+                [formControl]="materialControl"
+                [matAutocomplete]="autoMaterial"
+              />
+              <mat-autocomplete
+                #autoMaterial="matAutocomplete"
+                (optionSelected)="onChange($event.option.value)"
+              >
+                <mat-option
+                  *ngFor="let materialName of filteredMaterialNames | async"
+                  [value]="materialName"
+                >
+                  {{ materialName }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="row ml-2">
+            <mat-form-field>
+              <mat-label>Quantity</mat-label>
+              <input matInput formControlName="quantity" type="number" />
+            </mat-form-field>
+            <mat-form-field class="ml-2">
+              <mat-label>Unit</mat-label>
+              <input matInput formControlName="unit" value="{{ unit }}" />
+            </mat-form-field>
+          </div>
+          <div class="ml-2">
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
           <button
             mdbBtn
             class="float-right"
-            type="button"
+            type="submit"
             color="success"
             mdbWavesEffect
           >
             Add Consumption
           </button>
-        </mdb-card-body>
-      </mdb-card>
-    </div>
-  </form>
+        </form>
+      </mdb-card-text>
+    </mdb-card-body>
+  </mdb-card>
 </div>

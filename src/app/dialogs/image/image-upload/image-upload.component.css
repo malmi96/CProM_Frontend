@@ -1,0 +1,12 @@
+.mat-card {
+  width: 100%;
+}
+
+.image-preview {
+  margin: 1rem 0;
+  height: 20rem;
+}
+
+.image-preview img {
+  height: 100%;
+}

@@ -1,4 +1,4 @@
-<mat-card *ngIf="project && element">
+<mat-card *ngIf="project && element && !imageView">
   <mat-card-title>Stage Details</mat-card-title>
   <mat-card-content>
     <h1>Foundation Stage</h1>
@@ -61,9 +61,62 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit">Update</button>
-      <button mat-raised-button class="ml-3" color="warn" type="button">
+      <button
+        mat-raised-button
+        class="ml-3"
+        color="warn"
+        type="button"
+        (click)="onRemove()"
+      >
         Remove Stage
+      </button>
+      <button
+        mat-button
+        class="ml-3"
+        color="primary"
+        type="button"
+        (click)="onImages()"
+      >
+        Images
       </button>
     </form>
   </mat-card-content>
+</mat-card>
+<mat-card class="imageCard" *ngIf="imageView">
+  <h2>Images of {{ element.stageName }}</h2>
+  <button mat-icon-button style="color: green;" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="float-right"
+    (click)="openDialog(element._id)"
+  >
+    Upload Image
+  </button>
+  <div class="row" *ngIf="images">
+    <mat-card class="col-md-4" *ngFor="let image of images">
+      <mat-card-title>
+        <div class="row">
+          <div class="col-sm-8">
+            <h4>{{ image.imageName }}</h4>
+            <h4>{{ image.date | date }}</h4>
+          </div>
+          <div class="col-sm-3">
+            <button
+              mat-icon-button
+              class="ml-3"
+              color="warn"
+              (click)="deleteImage(image._id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-title>
+      <img mat-card-image [src]="image.imagePath" />
+    </mat-card>
+  </div>
 </mat-card>

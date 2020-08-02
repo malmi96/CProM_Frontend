@@ -20,7 +20,6 @@ export class LabourDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data.id);
     this.id = this.data.id;
     this.labourService.getLabourById(this.id).subscribe((labour) => {
       this.labour = labour;

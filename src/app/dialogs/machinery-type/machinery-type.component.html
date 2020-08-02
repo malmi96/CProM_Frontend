@@ -1,0 +1,41 @@
+<mat-card>
+  <div class="row">
+    <button mat-button color="primary" (click)="onAdd()">
+      Add New Machinery Type
+    </button>
+    <button mat-button color="warn" (click)="onRemove()">
+      Remove a Machinery Type
+    </button>
+  </div>
+  <div *ngIf="add">
+    <form [formGroup]="addForm" (ngSubmit)="addType()">
+      <mat-form-field>
+        <mat-label>New Machinery Type</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+      <button
+        class="float-right"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+  <div *ngIf="remove && types">
+    <form [formGroup]="removeForm" (ngSubmit)="removeType()">
+      <mat-form-field>
+        <mat-label>Select Machinery Type</mat-label>
+        <mat-select formControlName="selectType">
+          <mat-option *ngFor="let type of types" [value]="type._id">
+            {{ type.machineryType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="float-right" mat-raised-button color="warn" type="submit">
+        Remove
+      </button>
+    </form>
+  </div>
+</mat-card>

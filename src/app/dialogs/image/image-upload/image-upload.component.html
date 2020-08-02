@@ -1,0 +1,33 @@
+<mat-card>
+  <h2>Upload Images</h2>
+  <button
+    mat-stroked-button
+    type="button"
+    color="primary"
+    (click)="filePicker.click()"
+  >
+    Choose Image from Disk
+  </button>
+  <input type="file" hidden #filePicker (change)="onImagePicked($event)" />
+  <form [formGroup]="imageForm" (ngSubmit)="submit()" *ngIf="data">
+    <input type="text" formControlName="stageid" hidden />
+    <input type="text" formControlName="projectid" hidden />
+    <div
+      class="image-preview"
+      *ngIf="
+        imagePreview !== '' && imagePreview && imageForm.get('image').valid
+      "
+    >
+      <img [src]="imagePreview" [alt]="imageForm.value.date" />
+    </div>
+    <div *ngIf="imagePreview !== '' && imagePreview">
+      <mat-form-field>
+        <mat-label>Image Title</mat-label>
+        <input matInput type="text" formControlName="imageName" />
+      </mat-form-field>
+      <button mat-raised-button class="ml-2" color="primary" type="submit">
+        Upload
+      </button>
+    </div>
+  </form>
+</mat-card>

@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { InfoDialogComponent } from 'src/app/dialogs/info/info-dialog/info-dialog.component';
 import { Material } from 'src/app/interfaces/material';
 import { MaterialService } from 'src/app/services/material/material.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-material',
@@ -15,7 +16,8 @@ import { MaterialService } from 'src/app/services/material/material.service';
 export class AddMaterialComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    public materialService: MaterialService
+    public materialService: MaterialService,
+    private router: Router
   ) {}
   material: Material;
   newUnit: string;
@@ -63,7 +65,11 @@ export class AddMaterialComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data.unit !== null) {
+        this.units.push(data.unit);
+      }
+    });
   }
 
   openInfo(): void {
@@ -98,13 +104,17 @@ export class AddMaterialComponent implements OnInit {
         addMaterial.value.size;
     }
 
-    this.materialService.addMaterial(
-      addMaterial.value.category,
-      addMaterial.value.materialName,
-      addMaterial.value.quantity,
-      addMaterial.value.unit,
-      addMaterial.value.unitCost
-    );
+    this.materialService
+      .addMaterial(
+        addMaterial.value.category,
+        addMaterial.value.materialName,
+        addMaterial.value.quantity,
+        addMaterial.value.unit,
+        addMaterial.value.unitCost
+      )
+      .subscribe((res) => {
+        res = this.router.navigate(['material/view']);
+      });
   }
 
   ngOnInit(): void {}

@@ -1,100 +1,48 @@
-<!-- Editable table -->
-<div class="card">
-  <h2 class="card-header text-center font-weight-bold text-uppercase py-4">
-    Details of the Machinery
-  </h2>
-  <div class="card-body">
-    <div id="table" class="table-editable">
-      <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="add()">
-          <mdb-icon fas icon="plus" size="2x"></mdb-icon>
-        </a>
-      </span>
-      <table
-        class="table table-bordered table-responsive-md table-striped text-center"
-      >
-        <tr>
-          <th class="text-center">Machinery Type</th>
-          <th class="text-center">Machinery Name</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Machinery Condition</th>
-          <th class="text-center">Update</th>
-          <th class="text-center">Remove</th>
-        </tr>
-        <tr *ngFor="let person of personList; let id = index">
-          <td>
-            <span
-              (keyup)="changeValue(id, 'materialType', $event)"
-              (blur)="updateList(id, 'materialType', $event)"
-              contenteditable="true"
-              >{{ person.materialType }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'quantity', $event)"
-              (blur)="updateList(id, 'quantity', $event)"
-              >{{ person.quantity }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'unit', $event)"
-              (blur)="updateList(id, 'unit', $event)"
-              >{{ person.unit }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'unitCost', $event)"
-              (blur)="updateList(id, 'unitCost', $event)"
-              >{{ person.unitCost }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'criticalLevel', $event)"
-              (blur)="updateList(id, 'criticalLevel', $event)"
-              >{{ person.criticalLevel }}</span
-            >
-          </td>
-          <td>
-            <span class="table-update">
-              <button
-                type="button"
-                mdbBtn
-                color="success"
-                rounded="true"
-                size="sm"
-                class="my-0"
-                (click)="remove(id)"
-              >
-                Update
-              </button>
-            </span>
-          </td>
-          <td>
-            <span class="table-remove">
-              <button
-                type="button"
-                mdbBtn
-                color="danger"
-                rounded="true"
-                size="sm"
-                class="my-0"
-                (click)="remove(id)"
-              >
-                Remove
-              </button>
-            </span>
-          </td>
-        </tr>
-      </table>
-    </div>
+<!--Machinery View Table-->
+<div class="content">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" />
+  </mat-form-field>
+
+  <div class="example-container mat-elevation-z8" *ngIf="ELEMENT_DATA">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Machinery Type Column -->
+      <ng-container matColumnDef="machineryType">
+        <th mat-header-cell *matHeaderCellDef>Machinery Type</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.machineryType.machineryType }}
+        </td>
+      </ng-container>
+
+      <!-- Machinery Name Column -->
+      <ng-container matColumnDef="machineryName">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">
+          <a fxFlexFill (click)="openDialog(element._id)" class="mat-row-link">
+            {{ element.machineryName }}</a
+          >
+        </td>
+      </ng-container>
+
+      <!-- Condition Column -->
+      <ng-container matColumnDef="machineryCondition">
+        <th mat-header-cell *matHeaderCellDef>Condition</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.machineryCondition }}
+        </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date | date }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </div>
-<!-- Editable table -->

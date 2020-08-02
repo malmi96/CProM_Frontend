@@ -1,1 +1,62 @@
-<p>view-supplier works!</p>
+<!--Labour View Table-->
+<div class="content">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" />
+  </mat-form-field>
+
+  <div class="example-container mat-elevation-z8" *ngIf="ELEMENT_DATA">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Supplier Name Column -->
+      <ng-container matColumnDef="supplierName">
+        <th mat-header-cell *matHeaderCellDef>Supplier Name</th>
+        <td mat-cell *matCellDef="let element">
+          <a fxFlexFill (click)="openDialog(element._id)" class="mat-row-link">
+            {{ element.supplierName }}</a
+          >
+        </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.address }}
+        </td>
+      </ng-container>
+
+      <!-- Contact No Column -->
+      <ng-container matColumnDef="contactNo">
+        <th mat-header-cell *matHeaderCellDef>Contact No.</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.contactNo }}
+        </td>
+      </ng-container>
+
+      <!-- Supply Delay Column -->
+      <ng-container matColumnDef="supplyDelay">
+        <th mat-header-cell *matHeaderCellDef>Supply Delay</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.supplyDelay }}
+        </td>
+      </ng-container>
+
+      <!-- Reorder Delay Column -->
+      <ng-container matColumnDef="reorderDelay">
+        <th mat-header-cell *matHeaderCellDef>Reorder Delay</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reorderDelay }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

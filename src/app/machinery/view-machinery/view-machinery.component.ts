@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MachineryService } from 'src/app/services/machinery/machinery.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { EditMachineryComponent } from 'src/app/dialogs/edit-machinery/edit-machinery.component';
 
 @Component({
   selector: 'app-view-machinery',
@@ -6,100 +10,79 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-machinery.component.scss'],
 })
 export class ViewMachineryComponent implements OnInit {
-  constructor() {}
+  machinery = false;
+  dataSource: any;
+  displayedColumns: string[];
+  ELEMENT_DATA: any;
 
-  ngOnInit(): void {}
+  constructor(
+    private machineryService: MachineryService,
+    public dialog: MatDialog
+  ) {}
 
-  editField: string;
-  personList: Array<any> = [
-    {
-      id: 1,
-      materialType: 'Sand',
-      quantity: 10,
-      unit: 'Cubes',
-      unitCost: '15 000',
-      criticalLevel: '5 Cubes',
-    },
-    {
-      id: 2,
-      materialType: 'Bricks',
-      quantity: 1000,
-      unit: 'units',
-      unitCost: '500',
-      criticalLevel: '500 units',
-    },
-    {
-      id: 3,
-      materialType: 'Cement-50kg',
-      quantity: 500,
-      unit: 'packets',
-      unitCost: '2000',
-      criticalLevel: '100 pkts',
-    },
-  ];
-
-  awaitingPersonList: Array<any> = [
-    {
-      id: 6,
-      name: 'George Vega',
-      age: 28,
-      companyName: 'Classical',
-      country: 'Russia',
-      city: 'Moscow',
-    },
-    {
-      id: 7,
-      name: 'Mike Low',
-      age: 22,
-      companyName: 'Lou',
-      country: 'USA',
-      city: 'Los Angeles',
-    },
-    {
-      id: 8,
-      name: 'John Derp',
-      age: 36,
-      companyName: 'Derping',
-      country: 'USA',
-      city: 'Chicago',
-    },
-    {
-      id: 9,
-      name: 'Anastasia John',
-      age: 21,
-      companyName: 'Ajo',
-      country: 'Brazil',
-      city: 'Rio',
-    },
-    {
-      id: 10,
-      name: 'John Maklowicz',
-      age: 36,
-      companyName: 'Mako',
-      country: 'Poland',
-      city: 'Bialystok',
-    },
-  ];
-
-  updateList(id: number, property: string, event: any) {
-    const editField = event.target.textContent;
-    this.personList[id][property] = editField;
+  ngOnInit(): void {
+    this.machineryService.getMachinery().subscribe((machinery) => {
+      this.ELEMENT_DATA = machinery;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.displayedColumns = [
+        'machineryName',
+        'machineryType',
+        'machineryCondition',
+        'date',
+      ];
+    });
   }
 
-  remove(id: any) {
-    this.awaitingPersonList.push(this.personList[id]);
-    this.personList.splice(id, 1);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  add() {
-    if (this.awaitingPersonList.length > 0) {
-      const person = this.awaitingPersonList[0];
-      this.personList.push(person);
-      this.awaitingPersonList.splice(0, 1);
-    }
-  }
+  openDialog(id: string) {
+    const dialogRef = this.dialog.open(EditMachineryComponent, {
+      data: { machineryId: id },
+    });
 
-  changeValue(id: number, property: string, event: any) {
-    this.editField = event.target.textContent;
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data === undefined) {
+        return;
+      }
+      if (data.delete) {
+        this.machineryService
+          .deleteMachinery(data.delete.machineryId)
+          .subscribe((res) => {
+            res = this.machineryService
+              .getMachinery()
+              .subscribe((machinery) => {
+                this.ELEMENT_DATA = machinery;
+                this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+                this.displayedColumns = [
+                  'machineryName',
+                  'machineryType',
+                  'machineryCondition',
+                  'date',
+                ];
+              });
+          });
+      }
+      if (data.formValue) {
+        this.machineryService
+          .updateMachinery(data.machineryId, data.formValue)
+          .subscribe((res) => {
+            res = this.machineryService
+              .getMachinery()
+              .subscribe((machinery) => {
+                this.ELEMENT_DATA = machinery;
+                this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+                this.displayedColumns = [
+                  'machineryName',
+                  'machineryType',
+                  'machineryCondition',
+                  'date',
+                ];
+              });
+          });
+      }
+    });
   }
 }

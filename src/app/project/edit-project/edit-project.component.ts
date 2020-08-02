@@ -78,7 +78,6 @@ export class EditProjectComponent implements OnInit {
       this.stageNames.forEach((name) => {
         this.restageNames.push(name.split(' -')[0]);
       });
-      console.log(this.restageNames);
     });
 
     this.userService.getCustomer().subscribe((customer: any) => {
@@ -179,7 +178,6 @@ export class EditProjectComponent implements OnInit {
       this.editProjectForm.value.projectName =
         this.editProjectForm.value.city + ' - site';
     }
-    console.log(this.editProjectForm.value);
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.projectService
       .updateProject(this.id, this.editProjectForm.value)

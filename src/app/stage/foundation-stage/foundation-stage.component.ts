@@ -9,6 +9,8 @@ import { StageService } from 'src/app/services/stage/stage.service';
 import { threadId } from 'worker_threads';
 import { DataAddDialogComponent } from 'src/app/dialogs/success/data-add-dialog/data-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageService } from 'src/app/services/image/image.service';
+import { ImageUploadComponent } from 'src/app/dialogs/image/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-foundation-stage',
@@ -16,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./foundation-stage.component.css'],
 })
 export class FoundationStageComponent implements OnInit {
+  imageView = false;
+  images: any;
   foundationForm: FormGroup;
   stageData = false;
   labour: any;
@@ -40,8 +44,8 @@ export class FoundationStageComponent implements OnInit {
   ];
   selected = 'Foundation';
   filteredLabourNames: Observable<string[]>;
-
   constructor(
+    private imageService: ImageService,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
     private labourService: LabourService,
@@ -50,6 +54,7 @@ export class FoundationStageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.imageView = false;
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.projectService.getProjectById(this.id).subscribe((project: any) => {
       this.project = project;
@@ -105,5 +110,69 @@ export class FoundationStageComponent implements OnInit {
 
   submit() {
     console.log(this.foundationForm.value);
+    this.stageService
+      .updateStage(
+        this.foundationForm.value.elementid,
+        this.foundationForm.value
+      )
+      .subscribe((done) => {
+        done = alert('done');
+      });
+  }
+  onRemove() {
+    this.stageService
+      .deleteStage(this.foundationForm.value.elementid)
+      .subscribe((done: any) => {
+        done = alert('deleted');
+      });
+  }
+  onBack() {
+    this.imageView = false;
+  }
+  onImages() {
+    this.imageView = true;
+    this.imageService
+      .getImages(
+        this.activatedRoute.snapshot.paramMap.get('id'),
+        this.foundationForm.value.elementid
+      )
+      .subscribe((images: any) => {
+        this.images = images;
+      });
+  }
+
+  deleteImage(id: string) {
+    this.imageService.deleteImage(id).subscribe((res) => {
+      res = this.imageService
+        .getImages(
+          this.activatedRoute.snapshot.paramMap.get('id'),
+          this.foundationForm.value.elementid
+        )
+        .subscribe((images: any) => {
+          this.images = images;
+        });
+    });
+  }
+
+  openDialog(id: string): void {
+    const dialogRef = this.dialog.open(ImageUploadComponent, {
+      data: {
+        stageid: id,
+        projectid: this.activatedRoute.snapshot.paramMap.get('id'),
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data.msg === 'success') {
+        this.imageService
+          .getImages(
+            this.activatedRoute.snapshot.paramMap.get('id'),
+            this.foundationForm.value.elementid
+          )
+          .subscribe((images: any) => {
+            this.images = images;
+          });
+      }
+    });
   }
 }

@@ -1,101 +1,70 @@
-<!-- Editable table -->
-<div class="card" *ngIf="materials">
+<!-- View Material Table -->
+<div class="card" *ngIf="ELEMENT_DATA">
   <h2 class="card-header text-center font-weight-bold text-uppercase py-4">
-    Details of the Materials
+    Material Details
   </h2>
   <div class="card-body">
     <div id="table" class="table-editable">
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success">
+        <a class="text-success" (click)="materialAdd()">
           <mdb-icon fas icon="plus" size="2x"></mdb-icon>
         </a>
       </span>
-      <table
-        class="table table-bordered table-responsive-md table-striped text-center"
-      >
-        <tr>
-          <th class="text-center">Material Name</th>
-          <th class="text-center">Category</th>
-          <th class="text-center">Quantity</th>
-          <th class="text-center">Unit</th>
-          <th class="text-center">Unit Cost(Rs.)</th>
-          <th class="text-center">Update</th>
-          <th class="text-center">Remove</th>
-        </tr>
-        <tr *ngFor="let material of materials; let id = index">
-          <td>
-            <span
-              (keyup)="changeValue(id, 'materialName', $event)"
-              (blur)="updateList(id, 'materialName', $event)"
-              contenteditable="true"
-              >{{ material.materialName }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'materialCategory', $event)"
-              (blur)="updateList(id, 'materialCategory', $event)"
-              >{{ material.materialCategory }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'quantity', $event)"
-              (blur)="updateList(id, 'quantity', $event)"
-              >{{ material.quantity }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'unit', $event)"
-              (blur)="updateList(id, 'unit', $event)"
-              >{{ material.unit }}</span
-            >
-          </td>
-          <td>
-            <span
-              contenteditable="true"
-              (keyup)="changeValue(id, 'unitCost', $event)"
-              (blur)="updateList(id, 'unitCost', $event)"
-              >{{ material.unitCost }}</span
-            >
-          </td>
-          <td>
-            <span class="table-update">
-              <button
-                type="button"
-                mdbBtn
-                color="success"
-                rounded="true"
-                size="sm"
-                class="my-0"
-                (click)="remove(id)"
-              >
-                Update
-              </button>
-            </span>
-          </td>
-          <td>
-            <span class="table-remove">
-              <button
-                type="button"
-                mdbBtn
-                color="danger"
-                rounded="true"
-                size="sm"
-                class="my-0"
-                (click)="remove(id)"
-              >
-                Remove
-              </button>
-            </span>
-          </td>
-        </tr>
-      </table>
     </div>
   </div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. by material name"
+    />
+  </mat-form-field>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 ml-2 mr-2"
+    *ngIf="ELEMENT_DATA"
+  >
+    <!-- Name Column -->
+    <ng-container matColumnDef="materialName">
+      <th mat-header-cell *matHeaderCellDef>Material Name</th>
+      <td mat-cell *matCellDef="let element">
+        <a fxFlexFill (click)="onMaterial(element._id)" class="mat-row-link">{{
+          element.materialName
+        }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Material Category</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.materialCategory }}
+      </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    </ng-container>
+
+    <!-- Unit Column -->
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef>Unit</th>
+      <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+    </ng-container>
+
+    <!-- Unit Cost Column -->
+    <ng-container matColumnDef="unitCost">
+      <th mat-header-cell *matHeaderCellDef>Unit Cost(Rs.)</th>
+      <td mat-cell *matCellDef="let element">{{ element.unitCost }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
-<!-- Editable table -->
+<!-- View Materials Table -->

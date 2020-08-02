@@ -17,6 +17,12 @@ export class StageService {
     return this.http.get<any>(`http://localhost:5000/api/stage/${id}`);
   }
 
+  getStagesByProjectName(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/stage/view/${projectName}`
+    );
+  }
+
   updateStage(id: string, data: any): Observable<any> {
     return this.http.put(`http://localhost:5000/api/stage/${id}`, data);
   }
@@ -43,5 +49,9 @@ export class StageService {
       'http://localhost:5000/api/stage/add',
       stage
     );
+  }
+
+  deleteStage(id: string): Observable<Stage[]> {
+    return this.http.delete<Stage[]>(`http://localhost:5000/api/stage/${id}`);
   }
 }

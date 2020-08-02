@@ -13,14 +13,19 @@ export class AddSupplierComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(addSupplierForm: NgForm) {
-    console.log(addSupplierForm);
-    this.supplierService.addSupplier(
-      addSupplierForm.value.supplierName,
-      addSupplierForm.value.email,
-      addSupplierForm.value.address,
-      addSupplierForm.value.contactNo,
-      addSupplierForm.value.supplyDelay,
-      addSupplierForm.value.reorderDelay
-    );
+    this.supplierService
+      .addSupplier(
+        addSupplierForm.value.supplierName,
+        addSupplierForm.value.email,
+        addSupplierForm.value.address,
+        addSupplierForm.value.contactNo,
+        addSupplierForm.value.supplyDelay,
+        addSupplierForm.value.reorderDelay
+      )
+      .subscribe((res) => {
+        res = alert('Data added successfully');
+      });
+
+    addSupplierForm.resetForm();
   }
 }

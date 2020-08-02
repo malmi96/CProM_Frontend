@@ -1,0 +1,165 @@
+<!--Edit Material Dialog-->
+<div *ngIf="materialElement">
+  <div class="ml-2" style="width: 20cm;">
+    <mdb-card>
+      <mdb-card-body>
+        <mdb-card-title>
+          <h2>{{ materialElement.materialName }}</h2>
+          <button
+            mdbBtn
+            type="button"
+            class="btnOkay"
+            size="sm"
+            color="primary"
+            (click)="onChange()"
+          >
+            Change Material Name
+          </button>
+        </mdb-card-title>
+        <mdb-card-text>
+          <form
+            #updateMaterial="ngForm"
+            (ngSubmit)="onUpdate(materialElement._id, updateMaterial)"
+          >
+            <div *ngIf="changeName">
+              <div class="row">
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    placeholder="brand"
+                    type="text"
+                    name="brand"
+                    class="form-control-sm"
+                    ngModel
+                    #brand="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="brand" class="">Brand</label>
+                </div>
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    placeholder="cement"
+                    type="text"
+                    name="material"
+                    class="form-control-sm"
+                    ngModel
+                    #material="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="material" class="">Material</label>
+                </div>
+                <div class="md-form ml-3">
+                  <input
+                    mdbInput
+                    placeholder="50kg"
+                    type="text"
+                    name="size"
+                    class="form-control-sm"
+                    ngModel
+                    #size="ngModel"
+                    (keyup)="(0)"
+                  />
+                  <label for="size" class="">Size</label>
+                </div>
+              </div>
+              <div class="md-form">
+                <input
+                  mdbInput
+                  required
+                  readonly
+                  type="text"
+                  name="materialName"
+                  class="form-control"
+                  value="{{
+                    brand.value + '-' + material.value + '-' + size.value
+                  }}"
+                />
+                <label for="materialName" class="">Material Name</label>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="ml-1 mt-3">
+                <mat-label>Select Material Category</mat-label>
+                <mat-select
+                  name="category"
+                  ngModel="{{ materialElement.materialCategory }}"
+                  #category="ngModel"
+                >
+                  <mat-option
+                    *ngFor="let Category of categories"
+                    [value]="Category"
+                  >
+                    {{ Category }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field class="ml-3">
+                <mat-label>Quantity</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  name="quantity"
+                  ngModel="{{ materialElement.quantity }}"
+                  #quantity="ngModel"
+                />
+              </mat-form-field>
+              <div>
+                <mat-form-field class="ml-3">
+                  <mat-label>Select unit</mat-label>
+                  <mat-select
+                    name="unit"
+                    ngModel="{{ materialElement.unit }}"
+                    #unit="ngModel"
+                  >
+                    <mat-option *ngFor="let unit of units" [value]="unit">
+                      {{ unit }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <a class="text-success" (click)="openDialog()">
+                <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+              </a>
+            </div>
+
+            <div class="md-form">
+              <input
+                mdbInput
+                type="number"
+                name="unitCost"
+                class="form-control"
+                ngModel="{{ materialElement.unitCost }}"
+                #unitCost="ngModel"
+              />
+              <label for="unitCost" class="">Unit Cost(Rs.)</label>
+            </div>
+
+            <button
+              mdbBtn
+              class="float-right"
+              type="submit"
+              color="success"
+              mdbWavesEffect
+            >
+              Update Material
+            </button>
+            <button
+              mdbBtn
+              class="float-right"
+              type="button"
+              color="danger"
+              mdbWavesEffect
+              (click)="onDelete(materialElement._id)"
+            >
+              Delete Material
+            </button>
+          </form>
+        </mdb-card-text>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>

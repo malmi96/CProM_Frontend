@@ -81,6 +81,11 @@ import { FoundationStageComponent } from './stage/foundation-stage/foundation-st
 import { BrickworkStageComponent } from './stage/brickwork-stage/brickwork-stage.component';
 import { RoofingStageComponent } from './stage/roofing-stage/roofing-stage.component';
 import { PaintingStageComponent } from './stage/painting-stage/painting-stage.component';
+import { ImageUploadComponent } from './dialogs/image/image-upload/image-upload.component';
+import { EditMaterialComponent } from './dialogs/edit-material/edit-material.component';
+import { EditSupplierComponent } from './dialogs/edit-supplier/edit-supplier.component';
+import { MachineryTypeComponent } from './dialogs/machinery-type/machinery-type.component';
+import { EditMachineryComponent } from './dialogs/edit-machinery/edit-machinery.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +137,11 @@ import { PaintingStageComponent } from './stage/painting-stage/painting-stage.co
     BrickworkStageComponent,
     RoofingStageComponent,
     PaintingStageComponent,
+    ImageUploadComponent,
+    EditMaterialComponent,
+    EditSupplierComponent,
+    MachineryTypeComponent,
+    EditMachineryComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -164,6 +174,11 @@ import { PaintingStageComponent } from './stage/painting-stage/painting-stage.co
     InfoDialogComponent,
     LabourDialogComponent,
     DataAddDialogComponent,
+    ImageUploadComponent,
+    EditMaterialComponent,
+    EditSupplierComponent,
+    MachineryTypeComponent,
+    EditMachineryComponent,
   ],
   providers: [
     UserService,

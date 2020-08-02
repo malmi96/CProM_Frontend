@@ -1,59 +1,75 @@
 <!--Machinery Details Card-->
-<div>
-  <form>
-    <div class="ml-2" style="width: 20cm;">
-      <mdb-card>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h2>Add New Machinery Details</h2>
-          </mdb-card-title>
-          <mdb-card-text>
-            <form>
-              <div class="md-form">
-                <select class="browser-default custom-select">
-                  <option selected>Select Machinery Type</option>
-                  <option
-                    *ngFor="let machinery of machineries"
-                    [value]="machinery"
-                    >{{ machinery }}</option
-                  >
-                </select>
-              </div>
-              <div class="md-form">
-                <input
-                  mdbInput
-                  required
-                  type="text"
-                  name="machineryName"
-                  class="form-control"
-                />
-                <label for="machineryName" class="">Machinery Name</label>
-                <mdb-icon fas icon="info-circle"></mdb-icon>
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Choose a date</mat-label>
-                  <input matInput [matDatepicker]="picker" />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </form>
-          </mdb-card-text>
+
+<div class="ml-2" style="width: 20cm;" *ngIf="machineryTypes">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h2>Add New Machinery Details</h2>
+      </mdb-card-title>
+      <mdb-card-text>
+        <form [formGroup]="machineryForm" (ngSubmit)="submit()">
+          <mat-form-field>
+            <mat-label>Select Machinery Type</mat-label>
+            <mat-select formControlName="machineryType">
+              <mat-option
+                *ngFor="let machineryType of machineryTypes"
+                [value]="machineryType.machineryType"
+              >
+                {{ machineryType.machineryType }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="machineryTypeAdd()" color="primary">
+            Manage Machinery Types
+          </button>
+          <div class="md-form">
+            <input
+              mdbInput
+              required
+              type="text"
+              formControlName="machineryName"
+              class="form-control"
+            />
+            <label for="machineryName" class="">Machinery Name</label>
+            <a (click)="openInfo()">
+              <mdb-icon fas icon="info-circle"></mdb-icon>
+            </a>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Condition</mat-label>
+              <mat-select formControlName="machineryCondition">
+                <mat-option
+                  *ngFor="let condition of conditions"
+                  [value]="condition"
+                >
+                  {{ condition }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
           <button
             mdbBtn
             class="float-right"
-            type="button"
+            type="submit"
             color="success"
             mdbWavesEffect
           >
             Add Machinery
           </button>
-        </mdb-card-body>
-      </mdb-card>
-    </div>
-  </form>
+        </form>
+      </mdb-card-text>
+    </mdb-card-body>
+  </mdb-card>
 </div>

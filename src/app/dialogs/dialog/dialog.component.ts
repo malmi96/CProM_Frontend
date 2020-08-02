@@ -23,10 +23,8 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onSave(newValue: string) {
-    this.newValue = newValue;
-  }
-
-  getValue() {
-    return this.newValue;
+    this.dialogRef.close({
+      unit: newValue,
+    });
   }
 }

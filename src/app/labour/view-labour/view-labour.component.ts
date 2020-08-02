@@ -52,7 +52,6 @@ export class ViewLabourComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(data);
       if (data === undefined) {
         return;
       }
