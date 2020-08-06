@@ -1,0 +1,62 @@
+<!-- View Payments Table -->
+<div class="card" *ngIf="ELEMENT_DATA">
+  <h2 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Customer Payments
+  </h2>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. by customer name"
+    />
+  </mat-form-field>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 ml-2 mr-2"
+    *ngIf="ELEMENT_DATA"
+  >
+    <!-- Project Name Column -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef>Project Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.projectName.projectName }}
+      </td>
+    </ng-container>
+
+    <!-- Customer Name Column -->
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+      <td mat-cell *matCellDef="let element">
+        <a fxFlexFill class="mat-row-link" (click)="openDialog(element._id)">
+          {{ element.customerName.customerName }}
+        </a>
+      </td>
+    </ng-container>
+
+    <!-- Payment Date Column -->
+    <ng-container matColumnDef="paymentDate">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.paymentDate | date }}
+      </td>
+    </ng-container>
+
+    <!-- Payment Type Column -->
+    <ng-container matColumnDef="paymentType">
+      <th mat-header-cell *matHeaderCellDef>Payment Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.paymentType }}</td>
+    </ng-container>
+
+    <!-- Amount Cost Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount(Rs.)</th>
+      <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

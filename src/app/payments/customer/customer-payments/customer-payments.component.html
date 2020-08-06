@@ -8,49 +8,47 @@
             <h2>Customer Payments</h2>
           </mdb-card-title>
           <mdb-card-text>
-            <form #customerPaymentsForm="ngForm">
+            <form
+              [formGroup]="customerPaymentForm"
+              (ngSubmit)="submit()"
+              *ngIf="project"
+            >
               <div>
                 <mat-form-field style="width: 500px !important;">
                   <input
                     type="text"
-                    placeholder="Customer Name"
+                    placeholder="Project Name"
                     aria-label="Number"
                     matInput
-                    [formControl]="customerControl"
-                    [matAutocomplete]="autoCustomer"
+                    formControlName="projectName"
+                    [formControl]="projectControl"
+                    [matAutocomplete]="autoProject"
                   />
-                  <mat-autocomplete #autoCustomer="matAutocomplete">
+                  <mat-autocomplete
+                    #autoProject="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value)"
+                  >
                     <mat-option
-                      *ngFor="let customerName of filteredCustomerNames | async"
-                      [value]="customerName"
+                      *ngFor="let project of filteredProjects | async"
+                      [value]="project"
                     >
-                      {{ customerName }}
+                      {{ project }}
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
               </div>
               <mat-form-field style="width: 500px !important;">
-                <input
-                  type="text"
-                  placeholder="Project Name"
-                  aria-label="Number"
-                  matInput
-                  [formControl]="projectControl"
-                  [matAutocomplete]="autoProject"
-                />
-                <mat-autocomplete #autoProject="matAutocomplete">
-                  <mat-option
-                    *ngFor="let project of filteredProjects | async"
-                    [value]="project"
-                  >
-                    {{ project }}
-                  </mat-option>
-                </mat-autocomplete>
+                <mat-label>Customer Name</mat-label>
+                <input matInput formControlName="customerName" />
               </mat-form-field>
               <div>
                 <mat-form-field style="width: 500px !important;">
                   <mat-label>Payment Date</mat-label>
-                  <input matInput [matDatepicker]="picker" />
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    formControlName="paymentDate"
+                  />
                   <mat-datepicker-toggle
                     matSuffix
                     [for]="picker"
@@ -60,7 +58,7 @@
               </div>
               <mat-form-field style="width: 500px !important;">
                 <mat-label>Payment Type</mat-label>
-                <mat-select name="type" ngModel #type="ngModel">
+                <mat-select name="type" formControlName="paymentType">
                   <mat-option *ngFor="let type of types" [value]="type">
                     {{ type }}
                   </mat-option>
@@ -69,17 +67,11 @@
               <div class="row">
                 <mat-form-field class="ml-3">
                   <mat-label>Amount(Rs.)</mat-label>
-                  <input
-                    matInput
-                    type="number"
-                    name="amount"
-                    ngModel
-                    #amount="ngModel"
-                  />
+                  <input matInput type="number" formControlName="amount" />
                 </mat-form-field>
                 <mat-form-field class="ml-3">
                   <mat-label>Payment Method</mat-label>
-                  <mat-select name="method" ngModel #method="ngModel">
+                  <mat-select formControlName="method">
                     <mat-option *ngFor="let method of methods" [value]="method">
                       {{ method }}
                     </mat-option>
@@ -88,13 +80,7 @@
               </div>
               <mat-form-field style="width: 500px !important;">
                 <mat-label>Description</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="description"
-                  ngModel
-                  #description="ngModel"
-                />
+                <input matInput type="text" formControlName="description" />
               </mat-form-field>
               <div class="float-right">
                 <button mat-raised-button color="primary">Save Payment</button>

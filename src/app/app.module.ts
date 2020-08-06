@@ -86,6 +86,17 @@ import { EditMaterialComponent } from './dialogs/edit-material/edit-material.com
 import { EditSupplierComponent } from './dialogs/edit-supplier/edit-supplier.component';
 import { MachineryTypeComponent } from './dialogs/machinery-type/machinery-type.component';
 import { EditMachineryComponent } from './dialogs/edit-machinery/edit-machinery.component';
+import { ViewPaymentsComponent } from './payments/view-payments/view-payments.component';
+import { CustomerViewPaymentsComponent } from './payments/view-payments/customer-view-payments/customer-view-payments.component';
+import { LabourViewPaymentsComponent } from './payments/view-payments/labour-view-payments/labour-view-payments.component';
+import { MaterialViewPaymentsComponent } from './payments/view-payments/material-view-payments/material-view-payments.component';
+import { MachineryViewPaymentsComponent } from './payments/view-payments/machinery-view-payments/machinery-view-payments.component';
+import { UtilityViewPaymentsComponent } from './payments/view-payments/utility-view-payments/utility-view-payments.component';
+import { CustomerEditPaymentComponent } from './dialogs/customer-edit-payment/customer-edit-payment.component';
+import { LabourEditPaymentComponent } from './dialogs/labour-edit-payment/labour-edit-payment.component';
+import { MaterialEditPaymentComponent } from './dialogs/material-edit-payment/material-edit-payment.component';
+import { MachineryEditPaymentComponent } from './dialogs/machinery-edit-payment/machinery-edit-payment.component';
+import { UtilityEditPaymentComponent } from './dialogs/utility-edit-payment/utility-edit-payment.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +153,17 @@ import { EditMachineryComponent } from './dialogs/edit-machinery/edit-machinery.
     EditSupplierComponent,
     MachineryTypeComponent,
     EditMachineryComponent,
+    ViewPaymentsComponent,
+    CustomerViewPaymentsComponent,
+    LabourViewPaymentsComponent,
+    MaterialViewPaymentsComponent,
+    MachineryViewPaymentsComponent,
+    UtilityViewPaymentsComponent,
+    CustomerEditPaymentComponent,
+    LabourEditPaymentComponent,
+    MaterialEditPaymentComponent,
+    MachineryEditPaymentComponent,
+    UtilityEditPaymentComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -179,6 +201,7 @@ import { EditMachineryComponent } from './dialogs/edit-machinery/edit-machinery.
     EditSupplierComponent,
     MachineryTypeComponent,
     EditMachineryComponent,
+    CustomerEditPaymentComponent,
   ],
   providers: [
     UserService,

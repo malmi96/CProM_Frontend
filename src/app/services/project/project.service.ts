@@ -21,6 +21,12 @@ export class ProjectService {
     return this.http.get<any>(`http://localhost:5000/api/project/${id}`);
   }
 
+  getProjectByProjectName(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/project/view/${projectName}`
+    );
+  }
+
   updateProject(id: string, data: any): Observable<any> {
     return this.http.put(`http://localhost:5000/api/project/${id}`, data);
   }

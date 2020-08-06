@@ -1,0 +1,102 @@
+<!--Add Material Payments Card-->
+<div>
+  <form>
+    <div style="width: 20cm;">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>Material Payments</h2>
+          </mdb-card-title>
+          <mdb-card-text *ngIf="payment">
+            <form
+              [formGroup]="materialPaymentForm"
+              (ngSubmit)="submit(payment._id)"
+            >
+              <div>
+                <mat-form-field style="width: 500px !important;">
+                  <input
+                    type="text"
+                    placeholder="Material Name"
+                    aria-label="Number"
+                    matInput
+                    formControlName="materialName"
+                    [formControl]="materialControl"
+                    [matAutocomplete]="autoMaterial"
+                  />
+                  <mat-autocomplete #autoMaterial="matAutocomplete">
+                    <mat-option
+                      *ngFor="let material of filteredMaterials | async"
+                      [value]="material"
+                    >
+                      {{ material }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field class="ml-3">
+                  <input
+                    type="text"
+                    placeholder="Supplier Name"
+                    aria-label="Number"
+                    matInput
+                    formControlName="supplierName"
+                    [formControl]="supplierControl"
+                    [matAutocomplete]="autoSupplier"
+                  />
+                  <mat-autocomplete #autoSupplier="matAutocomplete">
+                    <mat-option
+                      *ngFor="let supplier of filteredSuppliers | async"
+                      [value]="supplier"
+                    >
+                      {{ supplier }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div>
+                  <mat-form-field class="ml-5">
+                    <mat-label>Payment Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="date"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <mat-form-field class="ml-3" style="width: 500px !important;">
+                  <mat-label>Amount(Rs.)</mat-label>
+                  <input matInput type="number" formControlName="amount" />
+                </mat-form-field>
+              </div>
+              <mat-form-field style="width: 500px !important;">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description" />
+              </mat-form-field>
+              <div class="float-right">
+                <button mat-raised-button color="primary" type="submit">
+                  Update Payment
+                </button>
+                <button
+                  mat-raised-button
+                  class="ml-2"
+                  color="warn"
+                  type="button"
+                  (click)="onDelete(payment._id)"
+                >
+                  Delete Payment
+                </button>
+              </div>
+            </form>
+          </mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </form>
+</div>

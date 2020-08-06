@@ -39,6 +39,7 @@ import { UserEditComponent } from './auth/user-edit/user-edit.component';
 import { CustomerEditComponent } from './auth/user-edit/customer-edit/customer-edit.component';
 import { EditProjectComponent } from './project/edit-project/edit-project.component';
 import { StageComponentComponent } from './stage/stage-component/stage-component.component';
+import { ViewPaymentsComponent } from './payments/view-payments/view-payments.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -147,7 +148,7 @@ const routes: Routes = [
       { path: 'machineryPayments', component: MachineryPaymentsComponent },
       { path: 'utilityPayments', component: UtilityPaymentsComponent },
       { path: 'labourPayments', component: LabourPaymentsComponent },
-      { path: 'toolsPayments', component: ToolsPaymentsComponent },
+      { path: 'view', component: ViewPaymentsComponent },
     ],
   },
 ];

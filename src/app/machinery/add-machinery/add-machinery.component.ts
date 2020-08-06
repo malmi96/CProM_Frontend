@@ -71,7 +71,8 @@ export class AddMachineryComponent implements OnInit {
         this.machineryForm.value.date
       )
       .subscribe((res) => {
-        res = alert('machinery details added successfully');
+        (res = alert('machinery details added successfully')),
+          this.machineryForm.reset();
       });
   }
 

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MaterialService } from 'src/app/services/material/material.service';
+import { SupplierService } from 'src/app/services/supplier/supplier.service';
+import { PaymentService } from 'src/app/services/payment/payment.service';
 
 @Component({
   selector: 'app-material-payments',
@@ -9,28 +12,43 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./material-payments.component.css'],
 })
 export class MaterialPaymentsComponent implements OnInit {
-  projectControl = new FormControl();
+  materialPaymentForm: FormGroup;
   materialControl = new FormControl();
   supplierControl = new FormControl();
   filteredMaterials: Observable<string[]>;
-  filteredProjects: Observable<string[]>;
   filteredSuppliers: Observable<string[]>;
-
-  materials: string[] = ['Insee-Cement-50kg', 'Sand', 'Brick'];
-  projects: string[] = [
-    'Kottawa-Project',
-    'Malabe-Project',
-    'Moratuwa-Project',
-  ];
-  stages: string[] = ['Foundation', 'Brick Work', 'Painting', 'Roofing'];
-  suppliers: string[] = ['Nimal Hardware', 'Amal Hardware', 'Saman Hardware'];
-  constructor() {}
+  material: any;
+  supplier: any;
+  materials: Array<any> = [];
+  suppliers: Array<any> = [];
+  constructor(
+    private materialService: MaterialService,
+    private supplierService: SupplierService,
+    private paymentService: PaymentService
+  ) {}
 
   ngOnInit(): void {
-    this.filteredProjects = this.projectControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filterProject(value))
-    );
+    this.materialPaymentForm = new FormGroup({
+      materialName: this.materialControl,
+      supplierName: this.supplierControl,
+      date: new FormControl(''),
+      amount: new FormControl(''),
+      description: new FormControl(''),
+    });
+
+    this.materialService.getMaterial().subscribe((material) => {
+      this.material = material;
+      this.material.forEach((response) => {
+        this.materials.push(response.materialName);
+      });
+    });
+
+    this.supplierService.getSupplier().subscribe((supplier) => {
+      this.supplier = supplier;
+      this.supplier.forEach((response) => {
+        this.suppliers.push(response.supplierName);
+      });
+    });
     this.filteredMaterials = this.materialControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filterMaterial(value))
@@ -38,13 +56,6 @@ export class MaterialPaymentsComponent implements OnInit {
     this.filteredSuppliers = this.supplierControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filterSupplier(value))
-    );
-  }
-  private _filterProject(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.projects.filter((project) =>
-      project.toLowerCase().includes(filterValue)
     );
   }
   private _filterMaterial(value: string): string[] {
@@ -60,5 +71,20 @@ export class MaterialPaymentsComponent implements OnInit {
     return this.suppliers.filter((supplier) =>
       supplier.toLowerCase().includes(filterValue)
     );
+  }
+
+  submit() {
+    this.paymentService
+      .addMaterialPayments(
+        this.materialPaymentForm.value.materialName,
+        this.materialPaymentForm.value.supplierName,
+        this.materialPaymentForm.value.date,
+        this.materialPaymentForm.value.amount,
+        this.materialPaymentForm.value.description
+      )
+      .subscribe((res) => {
+        (res = alert('data added successfully')),
+          this.materialPaymentForm.reset();
+      });
   }
 }

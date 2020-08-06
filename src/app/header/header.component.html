@@ -132,6 +132,14 @@
         class="nav-item"
         *ngIf="userAuthenticated && user === 'Project Manager'"
       >
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/payments"
+          >Payments</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
         <a
           class="nav-link waves-light"
           mdbWavesEffect

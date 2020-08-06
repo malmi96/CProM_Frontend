@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
+    style="background-color: rgb(95, 95, 95) !important;"
     #drawer
     class="sidenav"
     fixedInViewport
@@ -9,15 +10,37 @@
   >
     <div>
       <mat-toolbar>
-        <span>Menu</span>
+        <span style="color: honeydew;">Menu</span>
       </mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item routerLink="customerPayments">Customer Payments</a>
-        <a mat-list-item routerLink="labourPayments">Labour Payments</a>
-        <a mat-list-item routerLink="materialPayments">Material Payments</a>
-        <a mat-list-item routerLink="machineryPayments">Machinery Payments</a>
-        <a mat-list-item routerLink="toolsPayments">Tools Payments</a>
-        <a mat-list-item routerLink="utilityPayments"
+        <a
+          mat-list-item
+          routerLink="customerPayments"
+          style="color: honeydew !important;"
+          >Customer Payments</a
+        >
+        <a
+          mat-list-item
+          routerLink="labourPayments"
+          style="color: honeydew !important;"
+          >Labour Payments</a
+        >
+        <a
+          mat-list-item
+          routerLink="materialPayments"
+          style="color: honeydew !important;"
+          >Material Payments</a
+        >
+        <a
+          mat-list-item
+          routerLink="machineryPayments"
+          style="color: honeydew !important;"
+          >Machinery Payments</a
+        >
+        <a
+          mat-list-item
+          routerLink="utilityPayments"
+          style="color: honeydew !important;"
           >Utility and Transport Payments</a
         >
       </mat-nav-list>
@@ -35,6 +58,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Payments</span>
+      <button mat-raised-button color="primary" class="ml-3" routerLink="view">
+        View Payments
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

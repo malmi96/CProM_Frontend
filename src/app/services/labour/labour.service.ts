@@ -21,6 +21,10 @@ export class LabourService {
     return this.http.get<any>(`http://localhost:5000/api/labour/${id}`);
   }
 
+  getLabourNic(name: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:5000/api/labour/view/${name}`);
+  }
+
   updateLabour(id: string, data: any): Observable<any> {
     return this.http.patch(`http://localhost:5000/api/labour/${id}`, data);
   }
