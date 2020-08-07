@@ -1,0 +1,48 @@
+<div *ngIf="ELEMENT_DATA">
+  <mat-form-field class="mt-2">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Ex. project name"
+    />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Project Column -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef>Project Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.projectName.projectName }}
+      </td>
+    </ng-container>
+
+    <!-- Material Column -->
+    <ng-container matColumnDef="materialName">
+      <th mat-header-cell *matHeaderCellDef>Material Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.materialName.materialName }}
+      </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    </ng-container>
+
+    <!-- unit Column -->
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef>Unit</th>
+      <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

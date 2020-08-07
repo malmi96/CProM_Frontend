@@ -13,6 +13,7 @@ import { DataAddDialogComponent } from 'src/app/dialogs/success/data-add-dialog/
 export class AddLabourComponent implements OnInit {
   labourTypes: string[] = ['Mason Bass', 'Electrician', 'Carpenter'];
   labour: Labour;
+  result: any;
   constructor(private labourService: LabourService, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -29,7 +30,12 @@ export class AddLabourComponent implements OnInit {
         addLabour.value.joinedDate,
         addLabour.value.address
       )
-      .subscribe((res) => (res = this.dialog.open(DataAddDialogComponent)));
-    addLabour.resetForm();
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
+        addLabour.reset();
+      });
   }
 }

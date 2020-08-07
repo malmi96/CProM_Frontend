@@ -43,7 +43,6 @@ export class MaterialService {
   addMaterial(
     materialCategory: string,
     materialName: string,
-    quantity: number,
     unit: string,
     unitCost: number
   ): Observable<any> {
@@ -51,7 +50,6 @@ export class MaterialService {
       id: null,
       materialCategory,
       materialName,
-      quantity,
       unit,
       unitCost,
     };
@@ -102,6 +100,55 @@ export class MaterialService {
     return this.http.post<{ message: string }>(
       'http://localhost:5000/api/materialConsumption/add',
       materialConsumption
+    );
+  }
+
+  getMaterialAllocationByProjectName(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialAllocation/get/${projectName}`
+    );
+  }
+  getMaterialAllocationByMaterialName(materialName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialAllocation/get/material/${materialName}`
+    );
+  }
+  getMaterialAllocationLog(): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialAllocation/log`
+    );
+  }
+
+  removeLog(id: string): Observable<any> {
+    return this.http.delete<any>(
+      `http://localhost:5000/api/materialAllocation/delete/${id}`
+    );
+  }
+
+  getMaterialConsumptionByProject(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialConsumption/get/${projectName}`
+    );
+  }
+
+  getMaterialConsumptionByStage(
+    projectName: string,
+    stageName: string
+  ): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialConsumption/stage/${projectName}/${stageName}`
+    );
+  }
+
+  getMaterialConsumptionByMaterial(materialName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialConsumption/material/${materialName}`
+    );
+  }
+
+  getMaterialConsumptionLog(): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/materialConsumption/log`
     );
   }
 }

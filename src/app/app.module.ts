@@ -3,6 +3,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -97,6 +99,17 @@ import { LabourEditPaymentComponent } from './dialogs/labour-edit-payment/labour
 import { MaterialEditPaymentComponent } from './dialogs/material-edit-payment/material-edit-payment.component';
 import { MachineryEditPaymentComponent } from './dialogs/machinery-edit-payment/machinery-edit-payment.component';
 import { UtilityEditPaymentComponent } from './dialogs/utility-edit-payment/utility-edit-payment.component';
+import { MaterialAllocationViewComponent } from './dialogs/material-allocation-view/material-allocation-view.component';
+import { ByProjectComponent } from './material-handling/material-allocation/by-project/by-project.component';
+import { ByMaterialComponent } from './material-handling/material-allocation/by-material/by-material.component';
+import { AllocationLogComponent } from './material-handling/material-allocation/allocation-log/allocation-log.component';
+import { ConsumptionByProjectComponent } from './material-handling/material-consumption/consumption-by-project/consumption-by-project.component';
+import { ConsumptionByStageComponent } from './material-handling/material-consumption/consumption-by-stage/consumption-by-stage.component';
+import { ConsumptionByMaterialComponent } from './material-handling/material-consumption/consumption-by-material/consumption-by-material.component';
+import { ConsumptionLogComponent } from './material-handling/material-consumption/consumption-log/consumption-log.component';
+import { MaterialConsumptionViewComponent } from './dialogs/material-consumption-view/material-consumption-view.component';
+import { MaterialWarningComponent } from './dialogs/warnings/material-warning/material-warning.component';
+import { InquiryComponent } from './dialogs/inquiry/inquiry.component';
 
 @NgModule({
   declarations: [
@@ -164,9 +177,21 @@ import { UtilityEditPaymentComponent } from './dialogs/utility-edit-payment/util
     MaterialEditPaymentComponent,
     MachineryEditPaymentComponent,
     UtilityEditPaymentComponent,
+    MaterialAllocationViewComponent,
+    ByProjectComponent,
+    ByMaterialComponent,
+    AllocationLogComponent,
+    ConsumptionByProjectComponent,
+    ConsumptionByStageComponent,
+    ConsumptionByMaterialComponent,
+    ConsumptionLogComponent,
+    MaterialConsumptionViewComponent,
+    MaterialWarningComponent,
+    InquiryComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
+    NgxEchartsModule.forRoot({ echarts }),
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
@@ -202,6 +227,9 @@ import { UtilityEditPaymentComponent } from './dialogs/utility-edit-payment/util
     MachineryTypeComponent,
     EditMachineryComponent,
     CustomerEditPaymentComponent,
+    MaterialAllocationViewComponent,
+    MaterialWarningComponent,
+    InquiryComponent,
   ],
   providers: [
     UserService,

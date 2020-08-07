@@ -13,6 +13,7 @@ import { InfoDialogComponent } from 'src/app/dialogs/info/info-dialog/info-dialo
 export class AddMachineryComponent implements OnInit {
   machineryTypes: any;
   machineryForm: FormGroup;
+  result: any;
   conditions: string[] = ['New', 'Moderate', 'Critical'];
   constructor(
     private machineryService: MachineryService,
@@ -71,8 +72,11 @@ export class AddMachineryComponent implements OnInit {
         this.machineryForm.value.date
       )
       .subscribe((res) => {
-        (res = alert('machinery details added successfully')),
-          this.machineryForm.reset();
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
+        this.machineryForm.reset();
       });
   }
 

@@ -4,6 +4,7 @@ import { UserService } from '../../services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { InfoDialogComponent } from 'src/app/dialogs/info/info-dialog/info-dialog.component';
+import { InquiryComponent } from 'src/app/dialogs/inquiry/inquiry.component';
 
 @Component({
   templateUrl: './login.component.html',
@@ -26,6 +27,12 @@ export class LoginComponent implements OnInit {
         info: 'Please contact Admin or Sales Manager',
       },
     });
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  onDialog() {
+    const dialogRef = this.dialog.open(InquiryComponent);
 
     dialogRef.afterClosed().subscribe((result) => {});
   }

@@ -1,0 +1,71 @@
+<!--Naked Form-->
+<div class="card-block">
+  <!--Header-->
+  <div class="text-center">
+    <h3><i class="fa fa-envelope"></i> Send us an Inquiry:</h3>
+    <hr class="mt-2 mb-2" />
+  </div>
+
+  <!--Body-->
+  <p>Submit your contact information. We will get back to you soon.</p>
+  <br />
+  <form [formGroup]="inquiryForm" (ngSubmit)="submit()">
+    <!--Body-->
+    <div class="md-form">
+      <i class="fa fa-user prefix"></i>
+      <input
+        type="text"
+        id="form3"
+        class="form-control"
+        formControlName="customerName"
+      />
+      <label for="form3">Your name</label>
+    </div>
+
+    <div class="md-form">
+      <i class="fa fa-envelope prefix"></i>
+      <input
+        type="text"
+        id="form2"
+        class="form-control"
+        formControlName="email"
+      />
+      <label for="form2">Your email</label>
+    </div>
+
+    <div class="md-form">
+      <i class="fa fa-phone prefix"></i>
+      <input
+        type="text"
+        id="form32"
+        class="form-control"
+        formControlName="contactNo"
+      />
+      <label for="form34">Your Contact No.</label>
+    </div>
+
+    <div class="md-form">
+      <i class="fa fa-pencil prefix"></i>
+      <textarea
+        type="text"
+        id="form8"
+        class="md-textarea"
+        formControlName="message"
+      ></textarea>
+      <label for="form8">Message</label>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-default" type="submit">Submit</button>
+
+      <div class="call">
+        <br />
+        <p>
+          Or would you prefer to call?
+          <br />
+          <span><i class="fa fa-phone"> </i></span> + 94 774 565 280
+        </p>
+      </div>
+    </div>
+  </form>
+</div>

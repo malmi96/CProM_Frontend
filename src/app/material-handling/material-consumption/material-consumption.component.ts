@@ -5,6 +5,8 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { startWith, map } from 'rxjs/operators';
 import { MaterialService } from 'src/app/services/material/material.service';
 import { StageService } from 'src/app/services/stage/stage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MaterialConsumptionViewComponent } from 'src/app/dialogs/material-consumption-view/material-consumption-view.component';
 
 @Component({
   selector: 'app-material-consumption',
@@ -21,13 +23,16 @@ export class MaterialConsumptionComponent implements OnInit {
   materialArray: Array<any> = [];
   unit: string;
   stages: any;
+  error: any;
+  result: any;
   filteredProjectNames: Observable<string[]>;
   filteredMaterialNames: Observable<string[]>;
 
   constructor(
     private projectService: ProjectService,
     private materialService: MaterialService,
-    private stageService: StageService
+    private stageService: StageService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -107,11 +112,23 @@ export class MaterialConsumptionComponent implements OnInit {
         this.materialConsumptionForm.value.unit,
         this.materialConsumptionForm.value.date
       )
-      .subscribe((res) => {
-        res = alert('data added successfully');
-      });
-    this.materialConsumptionForm.reset();
+      .subscribe(
+        (result) => {
+          this.result = result;
+          setTimeout(() => {
+            this.result = false;
+          }, 3000);
+          this.materialConsumptionForm.reset();
+        },
+        (error) => {
+          this.error = error;
+        }
+      );
   }
 
-  onView() {}
+  onView(): void {
+    const dialogRef = this.dialog.open(MaterialConsumptionViewComponent);
+
+    dialogRef.afterClosed().subscribe();
+  }
 }

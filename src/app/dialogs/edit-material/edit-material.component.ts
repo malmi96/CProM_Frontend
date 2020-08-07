@@ -29,28 +29,6 @@ export class EditMaterialComponent implements OnInit {
     'Plumbing',
     'Other',
   ];
-  units: string[] = [
-    'packets',
-    'cube',
-    'units',
-    'g',
-    'kg',
-    'cm',
-    'm',
-    'in',
-    'ft',
-    'sq cm',
-    'sq m',
-    'sq in',
-    'sq ft',
-    'cu cm',
-    'cu m',
-    'cu in',
-    'cu ft',
-    'ml',
-    'l',
-    'other',
-  ];
   constructor(
     public dialog: MatDialog,
     public materialService: MaterialService,
@@ -77,12 +55,6 @@ export class EditMaterialComponent implements OnInit {
         title: 'Add new unit',
         inputLabel: 'Enter unit',
       },
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data.unit !== null) {
-        return this.units.push(data.unit);
-      }
     });
   }
 

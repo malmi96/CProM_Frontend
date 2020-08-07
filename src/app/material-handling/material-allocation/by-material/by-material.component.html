@@ -1,0 +1,26 @@
+<div *ngIf="materials" class="mt-2">
+  <form>
+    <mat-form-field style="width: 500px !important;">
+      <input
+        type="text"
+        placeholder="Material Name"
+        aria-label="Number"
+        matInput
+        [formControl]="materialControl"
+        [matAutocomplete]="autoProject"
+      />
+      <mat-autocomplete
+        #autoProject="matAutocomplete"
+        (optionSelected)="onMaterial($event.option.value)"
+      >
+        <mat-option
+          *ngFor="let materialName of filteredMaterialNames | async"
+          [value]="materialName"
+        >
+          {{ materialName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <div echarts [options]="chartOption"></div>
+</div>

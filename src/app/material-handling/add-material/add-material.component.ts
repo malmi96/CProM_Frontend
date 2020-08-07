@@ -20,6 +20,7 @@ export class AddMaterialComponent implements OnInit {
     private router: Router
   ) {}
   material: Material;
+  result: any;
   newUnit: string;
   values = '';
   description: string;
@@ -31,45 +32,8 @@ export class AddMaterialComponent implements OnInit {
     'Plumbing',
     'Other',
   ];
-  units: string[] = [
-    'packets',
-    'cube',
-    'units',
-    'g',
-    'kg',
-    'cm',
-    'm',
-    'in',
-    'ft',
-    'sq cm',
-    'sq m',
-    'sq in',
-    'sq ft',
-    'cu cm',
-    'cu m',
-    'cu in',
-    'cu ft',
-    'ml',
-    'l',
-    'other',
-  ];
   onKey(value: string) {
     this.values += value + ' | ';
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {
-        title: 'Add new unit',
-        inputLabel: 'Enter unit',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data.unit !== null) {
-        this.units.push(data.unit);
-      }
-    });
   }
 
   openInfo(): void {
@@ -108,12 +72,15 @@ export class AddMaterialComponent implements OnInit {
       .addMaterial(
         addMaterial.value.category,
         addMaterial.value.materialName,
-        addMaterial.value.quantity,
         addMaterial.value.unit,
         addMaterial.value.unitCost
       )
       .subscribe((res) => {
-        res = this.router.navigate(['material/view']);
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
+        addMaterial.resetForm();
       });
   }
 

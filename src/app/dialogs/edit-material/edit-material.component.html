@@ -98,32 +98,15 @@
 
             <div class="row">
               <mat-form-field class="ml-3">
-                <mat-label>Quantity</mat-label>
+                <mat-label>Unit</mat-label>
                 <input
                   matInput
-                  type="number"
-                  name="quantity"
-                  ngModel="{{ materialElement.quantity }}"
-                  #quantity="ngModel"
+                  type="text"
+                  name="unit"
+                  ngModel="{{ materialElement.unit }}"
+                  #unit="ngModel"
                 />
               </mat-form-field>
-              <div>
-                <mat-form-field class="ml-3">
-                  <mat-label>Select unit</mat-label>
-                  <mat-select
-                    name="unit"
-                    ngModel="{{ materialElement.unit }}"
-                    #unit="ngModel"
-                  >
-                    <mat-option *ngFor="let unit of units" [value]="unit">
-                      {{ unit }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <a class="text-success" (click)="openDialog()">
-                <mdb-icon fas icon="plus" size="2x"></mdb-icon>
-              </a>
             </div>
 
             <div class="md-form">

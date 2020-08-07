@@ -1,0 +1,26 @@
+<div class="dialog">
+  <button mat-raised-button type="button" color="primary" (click)="onProject()">
+    By Project
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    class="ml-2"
+    color="primary"
+    (click)="onMaterial()"
+  >
+    By Material
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    class="ml-2"
+    color="primary"
+    (click)="onLog()"
+  >
+    View Log
+  </button>
+  <app-by-project *ngIf="project"></app-by-project>
+  <app-by-material *ngIf="material"></app-by-material>
+  <app-allocation-log *ngIf="log"></app-allocation-log>
+</div>

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { startWith, map } from 'rxjs/operators';
 import { MaterialService } from 'src/app/services/material/material.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MaterialAllocationViewComponent } from 'src/app/dialogs/material-allocation-view/material-allocation-view.component';
 
 @Component({
   selector: 'app-material-allocation',
@@ -19,13 +21,15 @@ export class MaterialAllocationComponent implements OnInit {
   projectArray: Array<any> = [];
   materials: any;
   materialArray: Array<any> = [];
+  result: any;
   unit: string;
   filteredProjectNames: Observable<string[]>;
   filteredMaterialNames: Observable<string[]>;
 
   constructor(
     private projectService: ProjectService,
-    private materialService: MaterialService
+    private materialService: MaterialService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -95,9 +99,16 @@ export class MaterialAllocationComponent implements OnInit {
         this.materialAllocateForm.value.date
       )
       .subscribe((res) => {
-        res = alert('data added successfully');
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
+        this.materialAllocateForm.reset();
       });
   }
+  onView(): void {
+    const dialogRef = this.dialog.open(MaterialAllocationViewComponent);
 
-  onView() {}
+    dialogRef.afterClosed().subscribe();
+  }
 }

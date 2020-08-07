@@ -33,13 +33,7 @@ export class ViewMaterialComponent implements OnInit {
     this.materialService.getMaterial().subscribe((material) => {
       this.ELEMENT_DATA = material;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.displayedColumns = [
-        'materialName',
-        'category',
-        'quantity',
-        'unit',
-        'unitCost',
-      ];
+      this.displayedColumns = ['materialName', 'category', 'unit', 'unitCost'];
     });
   }
   materialAdd() {
@@ -52,7 +46,6 @@ export class ViewMaterialComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(data);
       if (data === undefined) {
         return;
       }
@@ -66,7 +59,6 @@ export class ViewMaterialComponent implements OnInit {
               this.displayedColumns = [
                 'materialName',
                 'category',
-                'quantity',
                 'unit',
                 'unitCost',
               ];
@@ -74,7 +66,6 @@ export class ViewMaterialComponent implements OnInit {
           });
       }
       if (data.formValue) {
-        console.log(data.formValue);
         this.materialService
           .updateMaterial(data.materialId, data.formValue)
           .subscribe((res) => {
@@ -84,7 +75,6 @@ export class ViewMaterialComponent implements OnInit {
               this.displayedColumns = [
                 'materialName',
                 'category',
-                'quantity',
                 'unit',
                 'unitCost',
               ];
