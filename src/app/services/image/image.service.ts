@@ -14,6 +14,16 @@ export class ImageService {
     );
   }
 
+  getImageByStageName(stageNameN: string): Observable<any> {
+    const stage = {
+      stageName: stageNameN,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/image/stageName',
+      stage
+    );
+  }
+
   addImage(
     imageName: string,
     image: File,

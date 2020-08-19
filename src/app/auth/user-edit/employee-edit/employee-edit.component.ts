@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { Employee } from 'src/app/interfaces/user';
 import { async } from '@angular/core/testing';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-edit',
@@ -12,11 +13,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./employee-edit.component.css'],
 })
 export class EmployeeEditComponent implements OnInit {
+  result: any;
   id: string;
   employee: Employee;
   message: boolean;
   changePassword = false;
   constructor(
+    public router: Router,
     private userService: UserService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -37,9 +40,11 @@ export class EmployeeEditComponent implements OnInit {
     }
     console.log(employeeUpdate.value);
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.userService.updateEmployee(this.id, employeeUpdate.value).subscribe();
-    // (user) => alert(`UPDATE ${user}`),
-    // (err) => alert(`error ${err}`)
+    this.userService
+      .updateEmployee(this.id, employeeUpdate.value)
+      .subscribe((res) => {
+        res = this.router.navigate(['/viewUser/viewEmployee']);
+      });
   }
 
   onChangePassword() {
@@ -48,11 +53,8 @@ export class EmployeeEditComponent implements OnInit {
 
   onDelete() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.userService
-      .deleteEmployee(this.id)
-      .subscribe
-      // (user) => alert('user deleted'),
-      // (err) => alert(err)
-      ();
+    this.userService.deleteEmployee(this.id).subscribe((res) => {
+      this.router.navigate(['/viewUser/viewEmployee']);
+    });
   }
 }

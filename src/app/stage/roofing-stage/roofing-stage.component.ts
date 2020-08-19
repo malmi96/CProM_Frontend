@@ -11,6 +11,7 @@ import { DataAddDialogComponent } from 'src/app/dialogs/success/data-add-dialog/
 import { MatDialog } from '@angular/material/dialog';
 import { ImageUploadComponent } from 'src/app/dialogs/image/image-upload/image-upload.component';
 import { ImageService } from 'src/app/services/image/image.service';
+import { TaskComponent } from 'src/app/dialogs/task/task.component';
 
 @Component({
   selector: 'app-roofing-stage',
@@ -170,6 +171,14 @@ export class RoofingStageComponent implements OnInit {
             this.images = images;
           });
       }
+    });
+  }
+  onTask(id: string): void {
+    const dialogRef = this.dialog.open(TaskComponent, {
+      data: {
+        stageid: id,
+        projectid: this.activatedRoute.snapshot.paramMap.get('id'),
+      },
     });
   }
 }

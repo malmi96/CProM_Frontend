@@ -14,7 +14,7 @@ export class AddMachineryComponent implements OnInit {
   machineryTypes: any;
   machineryForm: FormGroup;
   result: any;
-  conditions: string[] = ['New', 'Moderate', 'Critical'];
+  conditions: string[] = ['New', 'Moderate'];
   constructor(
     private machineryService: MachineryService,
     public dialog: MatDialog

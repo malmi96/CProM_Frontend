@@ -23,6 +23,16 @@ export class StageService {
     );
   }
 
+  getStagesByForGantt(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/stage/gantt/${projectName}`
+    );
+  }
+
+  getStagesByCustomerId(id: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:5000/api/stage/customer/${id}`);
+  }
+
   updateStage(id: string, data: any): Observable<any> {
     return this.http.put(`http://localhost:5000/api/stage/${id}`, data);
   }

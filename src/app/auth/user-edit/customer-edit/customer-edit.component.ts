@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,8 @@ export class CustomerEditComponent implements OnInit {
   changePassword = false;
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,9 +36,11 @@ export class CustomerEditComponent implements OnInit {
     }
     console.log(customerUpdate.value);
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.userService.updateCustomer(this.id, customerUpdate.value).subscribe();
-    // (user) => alert(`UPDATE ${user}`),
-    // (err) => alert(`error ${err}`)
+    this.userService
+      .updateCustomer(this.id, customerUpdate.value)
+      .subscribe((res) => {
+        res = this.router.navigate(['/viewUser/viewCustomer']);
+      });
   }
 
   onChangePassword() {
@@ -46,11 +49,8 @@ export class CustomerEditComponent implements OnInit {
 
   onDelete() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.userService
-      .deleteCustomer(this.id)
-      .subscribe
-      // (user) => alert('user deleted'),
-      // (err) => alert(err)
-      ();
+    this.userService.deleteCustomer(this.id).subscribe((res) => {
+      this.router.navigate(['/viewUser/viewCustomer']);
+    });
   }
 }

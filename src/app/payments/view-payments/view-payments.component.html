@@ -1,42 +1,17 @@
-<ul class="nav py-2">
-  <li class="nav-item">
-    <a class="nav-item" type="button" mdbBtn color="info" (click)="onCustomer()"
-      >Customer Payments</a
-    >
-  </li>
-  <li class="nav-item">
-    <a
-      class="nav-item"
-      type="button"
-      mdbBtn
-      color="default"
-      (click)="onLabour()"
-      >Labour Payments
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-item" type="button" mdbBtn color="info" (click)="onMaterial()"
-      >Material Payments</a
-    >
-  </li>
-  <li class="nav-item">
-    <a
-      class="nav-item"
-      type="button"
-      mdbBtn
-      color="default"
-      (click)="onMachinery()"
-      >Machinery Payments</a
-    >
-  </li>
-  <li class="nav-item">
-    <a class="nav-item" type="button" mdbBtn color="info" (click)="onUtility()"
-      >Utility Payments</a
-    >
-  </li>
-</ul>
-<app-customer-view-payments *ngIf="customer"></app-customer-view-payments>
-<app-labour-view-payments *ngIf="labour"></app-labour-view-payments>
-<app-material-view-payments *ngIf="material"></app-material-view-payments>
-<app-machinery-view-payments *ngIf="machinery"></app-machinery-view-payments>
-<app-utility-view-payments *ngIf="utility"></app-utility-view-payments>
+<mat-tab-group class="ml-2">
+  <mat-tab label="Customer">
+    <app-customer-view-payments></app-customer-view-payments>
+  </mat-tab>
+  <mat-tab label="Labour">
+    <app-labour-view-payments></app-labour-view-payments>
+  </mat-tab>
+  <mat-tab label="Material">
+    <app-material-view-payments></app-material-view-payments>
+  </mat-tab>
+  <mat-tab label="Machinery">
+    <app-machinery-view-payments></app-machinery-view-payments>
+  </mat-tab>
+  <mat-tab label="Utility and Transport">
+    <app-utility-view-payments></app-utility-view-payments>
+  </mat-tab>
+</mat-tab-group>

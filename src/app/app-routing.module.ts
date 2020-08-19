@@ -40,9 +40,36 @@ import { CustomerEditComponent } from './auth/user-edit/customer-edit/customer-e
 import { EditProjectComponent } from './project/edit-project/edit-project.component';
 import { StageComponentComponent } from './stage/stage-component/stage-component.component';
 import { ViewPaymentsComponent } from './payments/view-payments/view-payments.component';
+import { ViewInquiryComponent } from './inquiry/view-inquiry/view-inquiry.component';
+import { ViewProjectDuplicateComponent } from './project/view-project-duplicate/view-project-duplicate.component';
+import { PaymentAnalysisComponent } from './payments/payment-analysis/payment-analysis.component';
+import { ReportsComponent } from './reports/reports.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'gantt', component: GanttChartComponent },
+  {
+    path: 'inquiry',
+    component: ViewInquiryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'report',
+    component: ReportsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'viewProject',
+    component: ViewProjectDuplicateComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -149,6 +176,7 @@ const routes: Routes = [
       { path: 'utilityPayments', component: UtilityPaymentsComponent },
       { path: 'labourPayments', component: LabourPaymentsComponent },
       { path: 'view', component: ViewPaymentsComponent },
+      { path: 'analysis', component: PaymentAnalysisComponent },
     ],
   },
 ];

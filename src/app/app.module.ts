@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
+import { GanttModule } from '@syncfusion/ej2-angular-gantt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { from } from 'rxjs';
 import { UserRegisterComponent } from './auth/user-register/user-register.component';
@@ -110,6 +112,15 @@ import { ConsumptionLogComponent } from './material-handling/material-consumptio
 import { MaterialConsumptionViewComponent } from './dialogs/material-consumption-view/material-consumption-view.component';
 import { MaterialWarningComponent } from './dialogs/warnings/material-warning/material-warning.component';
 import { InquiryComponent } from './dialogs/inquiry/inquiry.component';
+import { ViewInquiryComponent } from './inquiry/view-inquiry/view-inquiry.component';
+import { ViewProjectDuplicateComponent } from './project/view-project-duplicate/view-project-duplicate.component';
+import { PaymentAnalysisComponent } from './payments/payment-analysis/payment-analysis.component';
+import { SupplierReportComponent } from './reports/supplier-report/supplier-report.component';
+import { ReportsComponent } from './reports/reports.component';
+import { CustomerDashboardComponent } from './dashboard/customer-dashboard/customer-dashboard.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
+import { TaskComponent } from './dialogs/task/task.component';
 
 @NgModule({
   declarations: [
@@ -188,10 +199,21 @@ import { InquiryComponent } from './dialogs/inquiry/inquiry.component';
     MaterialConsumptionViewComponent,
     MaterialWarningComponent,
     InquiryComponent,
+    ViewInquiryComponent,
+    ViewProjectDuplicateComponent,
+    PaymentAnalysisComponent,
+    SupplierReportComponent,
+    ReportsComponent,
+    CustomerDashboardComponent,
+    GalleryComponent,
+    GanttChartComponent,
+    TaskComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
     NgxEchartsModule.forRoot({ echarts }),
+    GanttModule,
+    MatTabsModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,

@@ -1,4 +1,8 @@
 <!-- Material form login -->
+<div class="alert alert-danger" role="alert" *ngIf="!isAuthenticated">
+  <h3>Wrong Credentials!</h3>
+  <p>Please log in again</p>
+</div>
 <main>
   <mdb-card class="login-card" *ngIf="!isLoading">
     <mdb-card-header class="purple white-text text-center py-4">

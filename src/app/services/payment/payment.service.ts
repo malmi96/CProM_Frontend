@@ -174,6 +174,9 @@ export class PaymentService {
   addMaterialPayments(
     materialName: string,
     supplierName: string,
+    projectName: string,
+    quantity: number,
+    unit: string,
     date: Date,
     amount: string,
     description: string
@@ -182,6 +185,9 @@ export class PaymentService {
       id: null,
       materialName,
       supplierName,
+      projectName,
+      quantity,
+      unit,
       date,
       amount,
       description,
@@ -235,6 +241,100 @@ export class PaymentService {
     return this.http.post(
       'http://localhost:5000/api/utilityPayments/add',
       payment
+    );
+  }
+
+  // Daily Expenses
+
+  getDailyExpensesForMaterial(dateR: Date): Observable<any> {
+    const dateObj = {
+      date: dateR,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/materialPayments/dailyExpenses',
+      dateObj
+    );
+  }
+
+  getDailyExpensesForMachinery(dateR: Date): Observable<any> {
+    const dateObj = {
+      date: dateR,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/machineryPayments/dailyExpenses',
+      dateObj
+    );
+  }
+
+  getDailyExpensesForUtility(dateR: Date): Observable<any> {
+    const dateObj = {
+      date: dateR,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/utilityPayments/dailyExpenses',
+      dateObj
+    );
+  }
+
+  getDailyExpensesForLabour(dateR: Date): Observable<any> {
+    const dateObj = {
+      date: dateR,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/labourWages/dailyExpenses',
+      dateObj
+    );
+  }
+
+  // Project Expenses
+  getProjectExpensesForLabour(projectName: string): Observable<any> {
+    const project = {
+      projectName,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/labourWages/projectExpenses',
+      project
+    );
+  }
+  getProjectExpensesForMaterial(projectName: string): Observable<any> {
+    const project = {
+      projectName,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/materialPayments/projectExpenses',
+      project
+    );
+  }
+  getProjectExpensesForMachinery(projectName: string): Observable<any> {
+    const project = {
+      projectName,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/machineryPayments/projectExpenses',
+      project
+    );
+  }
+  getProjectExpensesForUtility(projectName: string): Observable<any> {
+    const project = {
+      projectName,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/utilityPayments/projectExpenses',
+      project
+    );
+  }
+  getTotalCustomerPayments(projectName: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5000/api/customerPayments/total/${projectName}`
+    );
+  }
+  getProjectExpense(projectName: string): Observable<any> {
+    const project = {
+      projectName,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/projectExpenses/get',
+      project
     );
   }
 }

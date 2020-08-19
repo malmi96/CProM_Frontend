@@ -5,7 +5,7 @@
 >
   <!-- Navbar brand -->
   <mdb-navbar-brand
-    ><a class="navbar-brand" href="#">CProM</a></mdb-navbar-brand
+    ><a class="navbar-brand" style="color: white;">CProM</a></mdb-navbar-brand
   >
 
   <!-- Collapsible content -->
@@ -16,12 +16,16 @@
         class="nav-item"
         *ngIf="userAuthenticated && user === 'Project Manager'"
       >
-        <a
-          class="nav-link waves-light"
-          mdbWavesEffect
-          routerLinkActive="active"
-          routerLink="/dashboard"
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/dashboard"
           >Dashboard</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/inquiry"
+          >Inquiry</a
         >
       </li>
       <li
@@ -70,18 +74,7 @@
           >
         </div>
       </li>
-      <li
-        class="nav-item"
-        *ngIf="userAuthenticated && user === 'Project Manager'"
-      >
-        <a
-          class="nav-link waves-light"
-          mdbWavesEffect
-          routerLinkActive="active"
-          routerLink="/dashboard"
-          >Timeline</a
-        >
-      </li>
+
       <li
         class="nav-item dropdown"
         dropdown
@@ -144,7 +137,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/report"
           >Reports</a
         >
       </li>
@@ -170,7 +163,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/viewProject"
           >Projects</a
         >
       </li>
@@ -257,7 +250,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/viewProject"
           >Projects</a
         >
       </li>
@@ -306,7 +299,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink=""
+          routerLink="/report"
           >Reports</a
         >
       </li>
@@ -335,7 +328,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink=""
+          routerLink="/gallery"
           >Project Gallery</a
         >
       </li>
@@ -356,11 +349,7 @@
         class="nav-item"
         *ngIf="userAuthenticated && user === 'Sales and Marketing Manager'"
       >
-        <a
-          class="nav-link waves-light"
-          mdbWavesEffect
-          routerLinkActive="active"
-          routerLink=""
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/viewProject"
           >Projects</a
         >
       </li>
@@ -372,7 +361,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink=""
+          routerLink="/inquiry"
           >Inquiry Details</a
         >
       </li>
@@ -402,7 +391,21 @@
           >
         </div>-->
       </li>
-      <li *ngIf="userAuthenticated">
+      <li *ngIf="userAuthenticated && user === 'Customer'">
+        <label style="color: aliceblue;" *ngIf="customer">{{
+          customer.customerName
+        }}</label>
+        <button
+          type="button"
+          mdbBtn
+          color="dark"
+          mdbWavesEffect
+          (click)="onLogout()"
+        >
+          Logout
+        </button>
+      </li>
+      <li *ngIf="userAuthenticated && user !== 'Customer'">
         <label style="color: aliceblue;">{{ user }}</label>
         <button
           type="button"

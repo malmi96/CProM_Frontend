@@ -1,0 +1,25 @@
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    *ngFor="let stage of stages"
+    (click)="onClick(stage.stageName)"
+  >
+    {{ stage.stageName }}
+  </button>
+</div>
+<div class="row" *ngIf="images">
+  <mat-card class="col-md-4 ml-2 mt-2" *ngFor="let image of images">
+    <mat-card-title>
+      <div class="row">
+        <div class="col-sm-8">
+          <h4>{{ image.imageName }}</h4>
+        </div>
+        <div class="col-sm-3">
+          <h4>{{ image.date | date }}</h4>
+        </div>
+      </div>
+    </mat-card-title>
+    <img mat-card-image [src]="image.imagePath" />
+  </mat-card>
+</div>

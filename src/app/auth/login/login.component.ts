@@ -13,6 +13,8 @@ import { InquiryComponent } from 'src/app/dialogs/inquiry/inquiry.component';
 export class LoginComponent implements OnInit {
   userTypes: string[];
   isLoading = false;
+  isAuthenticated = true;
+  reuslt: any;
 
   constructor(public userService: UserService, public dialog: MatDialog) {}
   ngOnInit() {
@@ -47,5 +49,8 @@ export class LoginComponent implements OnInit {
       loginForm.value.password,
       loginForm.value.userType
     );
+    setTimeout(() => {
+      this.isAuthenticated = this.userService.getIsAuth();
+    }, 500);
   }
 }

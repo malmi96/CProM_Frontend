@@ -11,25 +11,19 @@ import { Router } from '@angular/router';
 import { ReturnStatement } from '@angular/compiler';
 import { Supplier } from 'src/app/interfaces/supplier';
 import { map } from 'rxjs/operators';
+import { nextTick } from 'process';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private suppliers: Supplier[] = [];
-  private supplierUpdated = new Subject<Supplier[]>();
-  private jwtHelper = new JwtHelperService();
-
   private isAuthenticated = false;
+  private userFailed = false;
   private token: string;
   private userType: string;
+  private userId: string;
   private authStatusListener = new Subject<boolean>();
   private userListener = new Subject<string>();
-
-  private customers: Customer[] = [];
-  private customerUpdated = new Subject<Customer[]>();
-  private employees: Employee[] = [];
-  private employeeUpdated = new Subject<Employee[]>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -40,10 +34,16 @@ export class UserService {
   getIsAuth() {
     return this.isAuthenticated;
   }
+  getLoggedInInfo() {
+    return this.userFailed;
+  }
+
   getIsUserType() {
     return this.userType;
   }
-
+  getUserId() {
+    return this.userId;
+  }
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
@@ -117,7 +117,7 @@ export class UserService {
     address: string,
     contactNo: number,
     password: string
-  ) {
+  ): Observable<any> {
     const customer: Customer = {
       id: null,
       customerName,
@@ -127,17 +127,10 @@ export class UserService {
       contactNo,
       password,
     };
-    this.http
-      .post<{ message: string }>(
-        'http://localhost:5000/api/users/customer',
-        customer
-      )
-      .subscribe((responseData) => {
-        console.log(responseData);
-        alert('User added successfully');
-        this.customers.push(customer);
-        this.customerUpdated.next([...this.customers]);
-      });
+    return this.http.post<{ message: string }>(
+      'http://localhost:5000/api/users/customer',
+      customer
+    );
   }
 
   addEmployee(
@@ -148,7 +141,7 @@ export class UserService {
     contactNo: number,
     password: string,
     designation: string
-  ) {
+  ): Observable<any> {
     const employee: Employee = {
       id: null,
       employeeName,
@@ -159,55 +152,56 @@ export class UserService {
       password,
       designation,
     };
-    this.http
-      .post<{ message: string }>(
-        'http://localhost:5000/api/users/employee',
-        employee
-      )
-      .subscribe((responseData) => {
-        console.log(responseData);
-        alert('User added successfully');
-        this.employees.push(employee);
-        this.employeeUpdated.next([...this.employees]);
-      });
+    return this.http.post<{ message: string }>(
+      'http://localhost:5000/api/users/employee',
+      employee
+    );
   }
 
   login(email: string, password: string, userType: string) {
     const user: Login = { email, password, userType };
     this.http
-      .post<{ token: string; userType: string }>(
+      .post<{ token: string; userType: string; userId: string }>(
         'http://localhost:5000/api/users/login',
         user
       )
-      .subscribe((response) => {
-        const token = response.token;
-        this.token = token;
-        // tslint:disable-next-line: no-shadowed-variable
-        const userType = response.userType;
-        this.userType = userType;
-        if (token) {
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.saveAuthData(token, userType);
-          this.router.navigate(['/dashboard']);
-          if (userType === 'Customer') {
-            this.userListener.next('Customer');
-          } else if (userType === 'Project Manager') {
-            this.userListener.next('Project Manager');
-          } else if (userType === 'Inventory Manager') {
-            this.userListener.next('Inventory Manager');
-          } else if (userType === 'Sales and Marketing Manager') {
-            this.userListener.next('Sales and Marketing Manager');
-          } else if (userType === 'Finance Manager') {
-            this.userListener.next('Finance Manager');
+      .subscribe(
+        (response) => {
+          const token = response.token;
+          this.token = token;
+          // tslint:disable-next-line: no-shadowed-variable
+          const userType = response.userType;
+          this.userType = userType;
+          if (token) {
+            this.isAuthenticated = true;
+            this.userId = response.userId;
+            this.authStatusListener.next(true);
+            this.saveAuthData(token, userType, this.userId);
+            this.router.navigate(['/dashboard']);
+            if (userType === 'Customer') {
+              this.userListener.next('Customer');
+            } else if (userType === 'Project Manager') {
+              this.userListener.next('Project Manager');
+            } else if (userType === 'Inventory Manager') {
+              this.userListener.next('Inventory Manager');
+            } else if (userType === 'Sales and Marketing Manager') {
+              this.userListener.next('Sales and Marketing Manager');
+            } else if (userType === 'Finance Manager') {
+              this.userListener.next('Finance Manager');
+            }
           }
+        },
+        (err) => {
+          this.userFailed = true;
+          location.reload();
         }
-      });
+      );
   }
 
   logout() {
     this.token = null;
     this.userType = null;
+    this.userId = null;
     this.isAuthenticated = false;
     this.userListener.next(null);
     this.authStatusListener.next(false);
@@ -222,30 +216,35 @@ export class UserService {
     }
     this.token = authInformation.token;
     this.userType = authInformation.userType;
+    this.userId = authInformation.userId;
     this.isAuthenticated = true;
     this.authStatusListener.next(true);
     this.userListener.next(this.userType);
   }
 
-  private saveAuthData(token: string, userType: string) {
+  private saveAuthData(token: string, userType: string, userId: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('userType', userType);
+    localStorage.setItem('userId', userId);
   }
 
   private clearAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('userType');
+    localStorage.removeItem('userId');
   }
 
-  private getAuthData() {
+  getAuthData() {
     const token = localStorage.getItem('token');
     const userType = localStorage.getItem('userType');
+    const userId = localStorage.getItem('userId');
     if (!token) {
       return;
     }
     return {
       token,
       userType,
+      userId,
     };
   }
 }

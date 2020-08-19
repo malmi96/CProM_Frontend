@@ -25,6 +25,9 @@ export interface MaterialPayment {
   id: string;
   materialName: string;
   supplierName: string;
+  projectName: string;
+  quantity: number;
+  unit: string;
   date: Date;
   amount: string;
   description: string;

@@ -1,0 +1,80 @@
+<mat-tab-group class="ml-2">
+  <mat-tab label="Daily Expenses">
+    <div class="mt-3">
+      <mat-form-field>
+        <mat-label>Choose Date</mat-label>
+        <input matInput [matDatepicker]="picker" ngModel name="date" #date />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        type="button"
+        class="ml-2"
+        color="primary"
+        (click)="onSearch(date.value)"
+      >
+        Search
+      </button>
+    </div>
+    <div>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngIf="materialTotal"
+          >Material Payments(Rs): {{ materialTotal }}</mat-list-item
+        >
+        <mat-list-item role="listitem" *ngIf="machineryTotal"
+          >Machinery Payments(Rs): {{ machineryTotal }}</mat-list-item
+        >
+        <mat-list-item role="listitem" *ngIf="utilityTotal"
+          >Utility Payments(Rs): {{ utilityTotal }}</mat-list-item
+        >
+        <mat-list-item role="listitem" *ngIf="labourTotal"
+          >Labour Wages(Rs): {{ labourTotal }}</mat-list-item
+        >
+        <mat-list-item
+          role="listitem"
+          *ngIf="machineryTotal || materialTotal || labourTotal || utilityTotal"
+        >
+          Total Expenses for the date {{ date.value }} (Rs):
+          {{ materialTotal + machineryTotal + labourTotal + utilityTotal }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-tab>
+  <mat-tab label="Total Expenses">
+    <div class="ml-3">
+      <mat-form-field class="mt-3">
+        <input
+          type="text"
+          placeholder="Project Name"
+          aria-label="Number"
+          matInput
+          [formControl]="projectControl"
+          [matAutocomplete]="autoProject"
+        />
+        <mat-autocomplete
+          #autoProject="matAutocomplete"
+          (optionSelected)="onProject($event.option.value)"
+        >
+          <mat-option
+            *ngFor="let project of filteredProjects | async"
+            [value]="project"
+          >
+            {{ project }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-list *ngIf="customer">
+        <mat-list-item
+          >Customer Name:
+          {{ customer.customerName.customerName }}</mat-list-item
+        >
+        <mat-list-item
+          >Total Payment(Rs): {{ customer.totalPayments }}</mat-list-item
+        >
+      </mat-list>
+    </div>
+
+    <div echarts [options]="chartOption"></div>
+  </mat-tab>
+</mat-tab-group>

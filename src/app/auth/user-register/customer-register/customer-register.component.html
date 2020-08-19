@@ -1,3 +1,6 @@
+<div class="alert alert-success" role="alert" *ngIf="result">
+  <h3>Data Added Successfully!</h3>
+</div>
 <form #customerRegister="ngForm" (ngSubmit)="submit(customerRegister)">
   <div class="md-form ml-4 mr-4">
     <div class="md-form form-sm">
@@ -72,6 +75,7 @@
       />
       <label for="contactNo" class="">Contact Number</label>
     </div>
+    <!--Password Field-->
     <div class="form-inline">
       <div class="md-form form-sm form-inline mt-0">
         <input
@@ -119,9 +123,6 @@
         [disabled]="customerRegister.invalid"
       >
         Register
-      </button>
-      <button type="reset" mdbBtn color="danger" mdbWavesEffect>
-        Clear
       </button>
     </div>
   </div>

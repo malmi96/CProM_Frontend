@@ -1,19 +1,21 @@
+<div class="alert alert-success" role="alert" *ngIf="result">
+  <h3>Data Added Successfully!</h3>
+</div>
+
 <form #employeeRegister="ngForm" (ngSubmit)="submit(employeeRegister)">
   <div class="md-form ml-4 mr-4">
-    <div class="row">
-      <select
-        class="browser-default custom-select"
-        name="designation"
-        #designation="ngModel"
-        ngModel
-      >
-        <option selected value="Finance Manager">Finance Manager</option>
-        <option value="Inventory Manager">Inventory Manager</option>
-        <option value="Sales and Marketing Manager"
-          >Sales and Marketing Manager</option
-        >
-      </select>
-      <label for="designation">Select the Designation</label>
+    <div class="ml-1">
+      <mat-form-field>
+        <mat-label>Select the Designation</mat-label>
+        <mat-select name="designation" ngModel #designation="ngModel">
+          <mat-option
+            *ngFor="let designation of designations"
+            [value]="designation"
+          >
+            {{ designation }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="md-form form-sm">
       <input
@@ -134,9 +136,6 @@
         [disabled]="employeeRegister.invalid"
       >
         Register
-      </button>
-      <button type="reset" mdbBtn color="danger" mdbWavesEffect>
-        Clear
       </button>
     </div>
   </div>
