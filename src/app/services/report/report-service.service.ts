@@ -17,4 +17,14 @@ export class ReportServiceService {
       material
     );
   }
+
+  getProgress(projectN: string): Observable<any> {
+    const project = {
+      projectName: projectN,
+    };
+    return this.http.post<any>(
+      'http://localhost:5000/api/report/progress',
+      project
+    );
+  }
 }

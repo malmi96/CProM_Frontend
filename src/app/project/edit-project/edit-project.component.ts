@@ -192,10 +192,8 @@ export class EditProjectComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.projectService
       .deleteProject(this.id)
-      .subscribe
-      // (user) => alert('user deleted'),
-      // (err) => alert(err)
-      ();
-    this.router.navigate(['/project/view']);
+      .subscribe(res => {
+        this.router.navigate(['/project/view']);
+      });
   }
 }

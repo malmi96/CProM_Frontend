@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { GanttModule } from '@syncfusion/ej2-angular-gantt';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { from } from 'rxjs';
 import { UserRegisterComponent } from './auth/user-register/user-register.component';
@@ -49,7 +51,6 @@ import { LabourComponent } from './labour/labour.component';
 import { AddLabourComponent } from './labour/add-labour/add-labour.component';
 import { ViewLabourComponent } from './labour/view-labour/view-labour.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { DialogService } from './services/dialog/dialog.service';
 import { SupplierService } from './services/supplier/supplier.service';
@@ -117,10 +118,29 @@ import { ViewProjectDuplicateComponent } from './project/view-project-duplicate/
 import { PaymentAnalysisComponent } from './payments/payment-analysis/payment-analysis.component';
 import { SupplierReportComponent } from './reports/supplier-report/supplier-report.component';
 import { ReportsComponent } from './reports/reports.component';
-import { CustomerDashboardComponent } from './dashboard/customer-dashboard/customer-dashboard.component';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 import { TaskComponent } from './dialogs/task/task.component';
+import { ProgressReportComponent } from './reports/progress-report/progress-report.component';
+import { ProjectManagaerDashboardComponent } from './project-managaer-dashboard/project-managaer-dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { CardComponent } from './card/card.component';
+import { ProjectProgressChartComponent } from './charts/project-progress-chart/project-progress-chart.component';
+import { TotalPaymentsChartComponent } from './charts/total-payments-chart/total-payments-chart.component';
+import { TotalMaterialconsumptionChartComponent } from './charts/total-materialconsumption-chart/total-materialconsumption-chart.component';
+import { ProjectTableComponent } from './project-table/project-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MiniCardComponent } from './mini-card/mini-card.component';
+import { MiniCardCustomersComponent } from './mini-card-customers/mini-card-customers.component';
+import { MiniCardLaboursComponent } from './mini-card-labours/mini-card-labours.component';
+import { MiniCardSuppliersComponent } from './mini-card-suppliers/mini-card-suppliers.component';
+import { InventoryManagerDashboardComponent } from './inventory-manager-dashboard/inventory-manager-dashboard.component';
+import { FinanceManagerDashboardComponent } from './finance-manager-dashboard/finance-manager-dashboard.component';
+import { SalesManagerDashboardComponent } from './sales-manager-dashboard/sales-manager-dashboard.component';
+import { CustomerProgressChartComponent } from './charts/customer-progress-chart/customer-progress-chart.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +150,7 @@ import { TaskComponent } from './dialogs/task/task.component';
     HomeComponent,
     UserRegisterComponent,
     CustomerRegisterComponent,
+    CardComponent,
     EmployeeRegisterComponent,
     MaterialHandlingComponent,
     AddMaterialComponent,
@@ -145,7 +166,6 @@ import { TaskComponent } from './dialogs/task/task.component';
     LabourComponent,
     AddLabourComponent,
     ViewLabourComponent,
-    DashboardComponent,
     DialogComponent,
     PaymentComponent,
     InfoDialogComponent,
@@ -208,14 +228,30 @@ import { TaskComponent } from './dialogs/task/task.component';
     GalleryComponent,
     GanttChartComponent,
     TaskComponent,
+    ProgressReportComponent,
+    ProjectManagaerDashboardComponent,
+    ProjectProgressChartComponent,
+    TotalPaymentsChartComponent,
+    TotalMaterialconsumptionChartComponent,
+    ProjectTableComponent,
+    MiniCardComponent,
+    MiniCardCustomersComponent,
+    MiniCardLaboursComponent,
+    MiniCardSuppliersComponent,
+    InventoryManagerDashboardComponent,
+    FinanceManagerDashboardComponent,
+    SalesManagerDashboardComponent,
+    CustomerProgressChartComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
     NgxEchartsModule.forRoot({ echarts }),
+    ChartsModule,
     GanttModule,
     MatTabsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatChipsModule,
     MatCardModule,
     MatDatepickerModule,
     MatDialogModule,
@@ -236,6 +272,10 @@ import { TaskComponent } from './dialogs/task/task.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
 
   entryComponents: [

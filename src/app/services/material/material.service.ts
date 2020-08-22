@@ -29,6 +29,10 @@ export class MaterialService {
     );
   }
 
+  getTotMaterialConsumption(): Observable<any> {
+    return this.http.get<any>('http://localhost:5000/api/totalMaterials/consumption');
+  }
+
   updateMaterial(id: string, data: any): Observable<any> {
     return this.http.patch<any>(
       `http://localhost:5000/api/material/${id}`,

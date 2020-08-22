@@ -18,7 +18,6 @@ import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.co
 import { LabourComponent } from './labour/labour.component';
 import { AddLabourComponent } from './labour/add-labour/add-labour.component';
 import { ViewLabourComponent } from './labour/view-labour/view-labour.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/role.guard';
 import { PaymentComponent } from './payments/payment/payment.component';
@@ -46,6 +45,11 @@ import { PaymentAnalysisComponent } from './payments/payment-analysis/payment-an
 import { ReportsComponent } from './reports/reports.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
+import { ProjectManagaerDashboardComponent } from './project-managaer-dashboard/project-managaer-dashboard.component';
+import { InventoryManagerDashboardComponent } from './inventory-manager-dashboard/inventory-manager-dashboard.component';
+import { FinanceManagerDashboardComponent } from './finance-manager-dashboard/finance-manager-dashboard.component';
+import { SalesManagerDashboardComponent } from './sales-manager-dashboard/sales-manager-dashboard.component';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -72,7 +76,27 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: ProjectManagaerDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'inventoryDashboard',
+    component: InventoryManagerDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'financeDashboard',
+    component: FinanceManagerDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'salesDashboard',
+    component: SalesManagerDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'customerDashboard',
+    component: CustomerDashboardComponent,
     canActivate: [AuthGuard],
   },
   {

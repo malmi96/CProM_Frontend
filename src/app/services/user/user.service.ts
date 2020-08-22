@@ -177,16 +177,20 @@ export class UserService {
             this.userId = response.userId;
             this.authStatusListener.next(true);
             this.saveAuthData(token, userType, this.userId);
-            this.router.navigate(['/dashboard']);
             if (userType === 'Customer') {
+              this.router.navigate(['/customerDashboard']);
               this.userListener.next('Customer');
             } else if (userType === 'Project Manager') {
+              this.router.navigate(['/dashboard']);
               this.userListener.next('Project Manager');
             } else if (userType === 'Inventory Manager') {
+              this.router.navigate(['/inventoryDashboard']);
               this.userListener.next('Inventory Manager');
             } else if (userType === 'Sales and Marketing Manager') {
+              this.router.navigate(['/salesDashboard']);
               this.userListener.next('Sales and Marketing Manager');
             } else if (userType === 'Finance Manager') {
+              this.router.navigate(['/financeDashboard']);
               this.userListener.next('Finance Manager');
             }
           }

@@ -1,10 +1,38 @@
-<p>gantt-chart works!</p>
-<ejs-gantt
+<div class="content">
+  <div>
+    <div class="alert alert-danger" role="alert" *ngIf="result">
+      <h3>Tasks are not allocated!</h3>
+    </div>
+    <mat-form-field style="width: 500px !important;">
+      <input
+        type="text"
+        placeholder="Project Name"
+        aria-label="Number"
+        matInput
+        [formControl]="projectControl"
+        [matAutocomplete]="autoProject"
+      />
+      <mat-autocomplete
+        #autoProject="matAutocomplete"
+        (optionSelected)="onChange($event.option.value)"
+      >
+        <mat-option
+          *ngFor="let projectName of filteredProjectNames | async"
+          [value]="projectName"
+        >
+          {{ projectName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <ejs-gantt
   id="GanttSample"
   [dataSource]="data"
-  height="450px"
-  width="800px"
+  height="100%"
+  width="100%"
   [taskFields]="taskfield"
-  *ngIf="stages"
+  *ngIf="stages && !result"
 >
 </ejs-gantt>
+</div>
+

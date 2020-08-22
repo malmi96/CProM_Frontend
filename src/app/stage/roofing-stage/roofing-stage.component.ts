@@ -21,6 +21,7 @@ import { TaskComponent } from 'src/app/dialogs/task/task.component';
 export class RoofingStageComponent implements OnInit {
   imageView = false;
   images: any;
+  result: any;
   roofingForm: FormGroup;
   stageData = false;
   labour: any;
@@ -113,15 +114,18 @@ export class RoofingStageComponent implements OnInit {
     console.log(this.roofingForm.value);
     this.stageService
       .updateStage(this.roofingForm.value.elementid, this.roofingForm.value)
-      .subscribe((done) => {
-        done = alert('done');
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
       });
   }
   onRemove() {
     this.stageService
       .deleteStage(this.roofingForm.value.elementid)
       .subscribe((done: any) => {
-        done = alert('deleted');
+        done = location.reload();
       });
   }
   onBack() {

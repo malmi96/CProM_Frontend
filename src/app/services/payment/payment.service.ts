@@ -59,6 +59,10 @@ export class PaymentService {
     );
   }
 
+  getTotalPayments(): Observable<any> {
+    return this.http.get<any>('http://localhost:5000/api/totalPayments/payments');
+  }
+
   // Update Payments
 
   updateCustomerPayment(id: string, data: any): Observable<any> {

@@ -21,6 +21,7 @@ import { TaskComponent } from 'src/app/dialogs/task/task.component';
 export class PaintingStageComponent implements OnInit {
   imageView = false;
   images: any;
+  result: any;
   paintingForm: FormGroup;
   stageData = false;
   labour: any;
@@ -110,15 +111,18 @@ export class PaintingStageComponent implements OnInit {
     console.log(this.paintingForm.value);
     this.stageService
       .updateStage(this.paintingForm.value.elementid, this.paintingForm.value)
-      .subscribe((done) => {
-        done = alert('done');
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
       });
   }
   onRemove() {
     this.stageService
       .deleteStage(this.paintingForm.value.elementid)
       .subscribe((done: any) => {
-        done = alert('deleted');
+        done = location.reload();
       });
   }
   onBack() {

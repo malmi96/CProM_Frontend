@@ -32,6 +32,12 @@ export class ProjectService {
     );
   }
 
+  getOverallProjectProgress(): Observable<any>{
+    return this.http.get<any>(
+      `http://localhost:5000/api/dash/progress`
+    );
+  }
+
   updateProject(id: string, data: any): Observable<any> {
     return this.http.put(`http://localhost:5000/api/project/${id}`, data);
   }
@@ -43,7 +49,7 @@ export class ProjectService {
     startedDate: Date,
     projectedEndingDate: Date,
     projectStatus: string
-  ) {
+  ): Observable<any> {
     const project: Project = {
       id: null,
       projectName,
@@ -54,16 +60,11 @@ export class ProjectService {
       projectStatus,
     };
 
-    this.http
+    return this.http
       .post<{ message: string }>(
         'http://localhost:5000/api/project/add',
         project
-      )
-      .subscribe((responseData) => {
-        console.log(responseData);
-        this.projects.push(project);
-        this.projectUpdated.next([...this.projects]);
-      });
+      );
   }
 
   deleteProject(id: string): Observable<Project[]> {

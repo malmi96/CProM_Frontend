@@ -19,6 +19,7 @@ export class StageComponentComponent implements OnInit {
   stageForm: FormGroup;
   stageData = false;
   labour: any;
+  result: any;
   labourControl = new FormControl();
   id: string;
   project: any;
@@ -103,9 +104,12 @@ export class StageComponentComponent implements OnInit {
         this.stageForm.value.status,
         this.project.projectName
       )
-      .subscribe(
-        (res) =>
-          (res = this.dialog.open(DataAddDialogComponent) && location.reload())
-      );
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
+        location.reload();
+      });
   }
 }

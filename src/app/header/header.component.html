@@ -137,6 +137,18 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
+          routerLink="/gantt"
+          >Gantt Chart</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="userAuthenticated && user === 'Project Manager'"
+      >
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          routerLinkActive="active"
           routerLink="/report"
           >Reports</a
         >
@@ -151,7 +163,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/inventoryDashboard"
           >Dashboard</a
         >
       </li>
@@ -238,7 +250,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/financeDashboard"
           >Dashboard</a
         >
       </li>
@@ -310,17 +322,8 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/customerDashboard"
           >Dashboard</a
-        >
-      </li>
-      <li class="nav-item" *ngIf="userAuthenticated && user === 'Customer'">
-        <a
-          class="nav-link waves-light"
-          mdbWavesEffect
-          routerLinkActive="active"
-          routerLink=""
-          >Project Progress</a
         >
       </li>
       <li class="nav-item" *ngIf="userAuthenticated && user === 'Customer'">
@@ -341,7 +344,7 @@
           class="nav-link waves-light"
           mdbWavesEffect
           routerLinkActive="active"
-          routerLink="/dashboard"
+          routerLink="/salesDashboard"
           >Dashboard</a
         >
       </li>

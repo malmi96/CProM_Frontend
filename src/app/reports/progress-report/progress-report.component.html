@@ -1,0 +1,120 @@
+<div class="mt-3 ml-3 mr-3">
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field style="width: 500px !important;">
+        <input
+          type="text"
+          placeholder="Project Name"
+          aria-label="Number"
+          matInput
+          [formControl]="projectControl"
+          [matAutocomplete]="autoProject"
+        />
+        <mat-autocomplete
+          #autoProject="matAutocomplete"
+          (optionSelected)="onChange($event.option.value)"
+        >
+          <mat-option
+            *ngFor="let projectName of filteredProjectNames | async"
+            [value]="projectName"
+          >
+            {{ projectName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="col-sm" *ngIf="data">
+      <button
+        mat-raised-button
+        color="warn"
+        class="float-right"
+        (click)="download()"
+        type="button"
+      >
+        Download pdf
+      </button>
+    </div>
+  </div>
+</div>
+<div style="height: 2rem;"></div>
+<div class="ml-3">
+  <div class="report-body" id="report" *ngIf="data">
+    <div class="content">
+      <img
+        src="assets/img/logo.jpg"
+        alt="Company Logo"
+        class="mt-3"
+        width="100"
+        height="60"
+      />
+      <h2 class="title">Sriya Constructions</h2>
+      <div class="row">
+        <div class="col-sm">
+          <div class="address">
+            <p>
+              No. 30,<br />
+              Maharagama Rd,<br />Piliyandala.
+            </p>
+            <p>
+              Contact: +94 112 454 122<br />Email: sriyaconstruction@gmail.com
+            </p>
+          </div>
+        </div>
+        <div class="col-sm">
+          <h3 style="font-size: large; font-weight: bold;">
+            {{ reportTitle }}
+          </h3>
+        </div>
+        <div class="col-sm">
+          <div class="date">
+            <p>{{ date | date }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="material">
+        <div class="row mt-3">
+          <div class="col-sm">
+            <h3>Project Name: {{ projectName }}</h3>
+          </div>
+          <div class="col-sm"></div>
+          <div class="col-sm"></div>
+        </div>
+      </div>
+      <div *ngIf="msg" >
+        <h3>No tasks have been completed yet</h3>
+      </div>
+      <div class="chart" *ngIf="!msg" >
+        <div echarts [options]="chartOption"></div>
+      </div>
+      <div class="gap1"></div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="signature">
+            <p>
+              ................................<br />Signature of Project Manager
+            </p>
+          </div>
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm">
+          <div class="signedDate">
+            <p>................................<br />Signed Date</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm">
+            <div class="createdby">
+              <p>Created by CProM</p>
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+              <p>Page 1 of 1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

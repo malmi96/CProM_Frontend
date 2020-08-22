@@ -17,6 +17,7 @@ import { ProjectService } from 'src/app/services/project/project.service';
 export class AddProjectComponent implements OnInit {
   addProjectForm: FormGroup;
   values = '';
+  result: any;
   customerControl = new FormControl();
   customer: any;
   resultArray: Array<any> = [];
@@ -93,7 +94,13 @@ export class AddProjectComponent implements OnInit {
       this.addProjectForm.value.startingDate,
       this.addProjectForm.value.endingDate,
       this.addProjectForm.value.status
-    );
+    ).subscribe(res => {
+      this.result = res;
+      setTimeout(() => {
+        this.result = false;
+      }, 3000);
+      this.addProjectForm.reset();
+    });
   }
 
   onReset() {

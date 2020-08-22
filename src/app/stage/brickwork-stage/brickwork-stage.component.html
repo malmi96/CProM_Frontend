@@ -1,4 +1,7 @@
 <mat-card *ngIf="project && element && !imageView">
+  <div class="alert alert-success" role="alert" *ngIf="result">
+    <h3>Data Updated Successfully!</h3>
+  </div>
   <mat-card-title>Stage Details</mat-card-title>
   <mat-card-content>
     <h1>Brick Work Stage</h1>

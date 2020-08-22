@@ -21,6 +21,7 @@ import { TaskComponent } from 'src/app/dialogs/task/task.component';
 export class BrickworkStageComponent implements OnInit {
   imageView = false;
   images: any;
+  result: any;
   brickworkForm: FormGroup;
   stageData = false;
   labour: any;
@@ -113,15 +114,18 @@ export class BrickworkStageComponent implements OnInit {
     console.log(this.brickworkForm.value);
     this.stageService
       .updateStage(this.brickworkForm.value.elementid, this.brickworkForm.value)
-      .subscribe((done) => {
-        done = alert('done');
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
       });
   }
   onRemove() {
     this.stageService
       .deleteStage(this.brickworkForm.value.elementid)
       .subscribe((done: any) => {
-        done = alert('deleted');
+        done = location.reload();
       });
   }
   onBack() {

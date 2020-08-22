@@ -1,0 +1,15 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px" rowWidth="100%" >
+    <!--Charts-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols"
+      [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Project Progress %">
+        <div>
+          <app-customer-progress-chart></app-customer-progress-chart>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+ </div>
+

@@ -21,6 +21,7 @@ import { TaskComponent } from 'src/app/dialogs/task/task.component';
 export class FoundationStageComponent implements OnInit {
   imageView = false;
   images: any;
+  result: any;
   foundationForm: FormGroup;
   stageData = false;
   labour: any;
@@ -116,15 +117,18 @@ export class FoundationStageComponent implements OnInit {
         this.foundationForm.value.elementid,
         this.foundationForm.value
       )
-      .subscribe((done) => {
-        done = alert('done');
+      .subscribe((res) => {
+        this.result = res;
+        setTimeout(() => {
+          this.result = false;
+        }, 3000);
       });
   }
   onRemove() {
     this.stageService
       .deleteStage(this.foundationForm.value.elementid)
       .subscribe((done: any) => {
-        done = alert('deleted');
+        done = location.reload();
       });
   }
   onBack() {

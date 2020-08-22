@@ -1,0 +1,57 @@
+
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Mini Cards-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+      [rowspan]="( cardLayout | async )?.miniCard.rows">
+      <app-card title="No of Inquiries">
+        <div>
+          <app-mini-card></app-mini-card>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+      [rowspan]="( cardLayout | async )?.miniCard.rows">
+      <app-card title="No of Customers">
+        <div>
+          <app-mini-card-customers></app-mini-card-customers>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+      [rowspan]="( cardLayout | async )?.miniCard.rows">
+      <app-card title="No of Labours">
+        <div>
+          <app-mini-card-labours></app-mini-card-labours>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard.cols"
+      [rowspan]="( cardLayout | async )?.miniCard.rows">
+      <app-card title="No of Suppliers">
+        <div>
+          <app-mini-card-suppliers></app-mini-card-suppliers>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+    <!--Charts-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols"
+      [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Total Material Consumption">
+        <div>
+          <app-total-materialconsumption-chart></app-total-materialconsumption-chart>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols"
+      [rowspan]="( cardLayout | async )?.chart.rows">
+      <app-card title="Project List">
+        <div>
+          <app-project-table></app-project-table>
+        </div>
+      </app-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+ </div>

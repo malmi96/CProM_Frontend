@@ -1,0 +1,11 @@
+<mat-card class="dashboard-card" *ngIf="customers" >
+  <mat-card-header class="card-header">
+      <mat-card-title>
+          {{customers.length}}
+      </mat-card-title>
+      <div mat-card-avatar class="card-icon">
+          <mat-icon color="accent" class="avatar-icon">person</mat-icon>
+      </div>
+  </mat-card-header>
+  <h3 class="title-text">No of Customers</h3>
+</mat-card>
