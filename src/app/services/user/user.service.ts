@@ -18,7 +18,7 @@ import { nextTick } from 'process';
 })
 export class UserService {
   private isAuthenticated = false;
-  private userFailed = false;
+  private userFailed = true;
   private token: string;
   private userType: string;
   private userId: string;
@@ -167,6 +167,7 @@ export class UserService {
       )
       .subscribe(
         (response) => {
+
           const token = response.token;
           this.token = token;
           // tslint:disable-next-line: no-shadowed-variable
@@ -196,8 +197,7 @@ export class UserService {
           }
         },
         (err) => {
-          this.userFailed = true;
-          location.reload();
+          err = location.reload();
         }
       );
   }

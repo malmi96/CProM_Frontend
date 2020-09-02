@@ -11,6 +11,7 @@ import { UserService } from '../../../services/user/user.service';
 export class EmployeeRegisterComponent implements OnInit {
   result: any;
   message: boolean;
+  msg: any;
   designations: string[] = [
     'Finance Manager',
     'Inventory Manager',
@@ -43,6 +44,13 @@ export class EmployeeRegisterComponent implements OnInit {
         this.result = res;
         setTimeout(() => {
           this.result = false;
+        }, 3000);
+        employeeRegister.resetForm();
+      },
+      (err) => {
+        this.msg = err;
+        setTimeout(() => {
+          this.msg = false;
         }, 3000);
         employeeRegister.resetForm();
       });

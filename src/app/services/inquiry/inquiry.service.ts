@@ -31,4 +31,15 @@ export class InquiryService {
   getInquiry(): Observable<any> {
     return this.http.get<any>('http://localhost:5000/api/inquiry/get');
   }
+
+  updateStatus(newStatus: string, id: string): Observable<any> {
+    const statusj = {
+      status: newStatus,
+    };
+    return this.http.patch<any>(`http://localhost:5000/api/inquiry/status/${id}`, statusj);
+  }
+
+  removeInquiry(id: string): Observable<any>{
+    return this.http.delete<any>(`http://localhost:5000/api/inquiry/${id}`);
+  }
 }

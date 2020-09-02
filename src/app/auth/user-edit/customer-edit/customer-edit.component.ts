@@ -13,6 +13,8 @@ export class CustomerEditComponent implements OnInit {
   id: string;
   customer: Customer;
   message: boolean;
+  msg: any;
+  result = false;
   changePassword = false;
   constructor(
     private userService: UserService,
@@ -50,7 +52,12 @@ export class CustomerEditComponent implements OnInit {
   onDelete() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.userService.deleteCustomer(this.id).subscribe((res) => {
-      this.router.navigate(['/viewUser/viewCustomer']);
+      this.msg = res;
+      console.log(this.msg);
+      if (this.msg === null ){
+        this.router.navigate(['/viewUser/viewCustomer']);
+      }
+      return this.result = true;
     });
   }
 }

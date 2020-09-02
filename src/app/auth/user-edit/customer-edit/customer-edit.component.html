@@ -1,4 +1,7 @@
 <div>
+  <div class="alert alert-danger" role="alert" *ngIf="result">
+    <h3>User Cannot Be Deleted! First Remove the Project</h3>
+  </div>
   <mat-card *ngIf="customer">
     <form #customerUpdate="ngForm" (submit)="onUpdate(customerUpdate)">
       <div class="md-form ml-4 mr-4">

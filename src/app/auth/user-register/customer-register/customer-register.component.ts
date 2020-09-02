@@ -13,6 +13,7 @@ export class CustomerRegisterComponent implements OnInit {
   result: any;
   customer: Customer;
   message: boolean;
+  msg: any;
   constructor(public userService: UserService) {}
 
   ngOnInit(): void {}
@@ -39,6 +40,13 @@ export class CustomerRegisterComponent implements OnInit {
           this.result = false;
         }, 3000);
         customerRegister.resetForm();
-      });
+      },
+      (err) => {
+        this.msg = err;
+        setTimeout(() => {
+          this.msg = false;
+        }, 3000);
+        customerRegister.resetForm();
+      } );
   }
 }

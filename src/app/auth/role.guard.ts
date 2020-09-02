@@ -16,8 +16,20 @@ export class RoleGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     const userType = this.authService.getIsUserType();
+    console.log(userType);
     if (userType !== 'Project Manager') {
-      this.router.navigate(['/dashboard']);
+      if (userType === 'Customer'){
+        this.router.navigate(['/customerDashboard']);
+      }
+      else if (userType === 'Inventory Manager'){
+        this.router.navigate(['/inventoryDashboard']);
+      }
+      else if (userType === 'Sales and Marketing Manager'){
+        this.router.navigate(['/salesDashboard']);
+      }
+      else if (userType === 'Finance Manager'){
+        this. router.navigate(['/financeDashboard']);
+      }
     }
     return true;
   }

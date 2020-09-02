@@ -15,6 +15,8 @@ export class ViewMaterialComponent implements OnInit {
   material: any;
   ELEMENT_DATA: any;
   dataSource: any;
+  response: any;
+  result = false;
   displayedColumns: string[];
 
   applyFilter(event: Event) {
@@ -53,6 +55,10 @@ export class ViewMaterialComponent implements OnInit {
         this.materialService
           .deleteMaterial(data.delete.materialId)
           .subscribe((res) => {
+            this.response = res;
+            if (this.response !== null){
+              return this.result = true;
+            }
             res = this.materialService.getMaterial().subscribe((material) => {
               this.ELEMENT_DATA = material;
               this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);

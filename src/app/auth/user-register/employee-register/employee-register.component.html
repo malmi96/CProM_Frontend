@@ -1,6 +1,9 @@
 <div class="alert alert-success" role="alert" *ngIf="result">
   <h3>Data Added Successfully!</h3>
 </div>
+<div class="alert alert-danger" role="alert" *ngIf="msg">
+  <h3>User Already Exist!</h3>
+</div>
 
 <form #employeeRegister="ngForm" (ngSubmit)="submit(employeeRegister)">
   <div class="md-form ml-4 mr-4">

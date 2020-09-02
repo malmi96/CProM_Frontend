@@ -30,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { from } from 'rxjs';
 import { UserRegisterComponent } from './auth/user-register/user-register.component';
@@ -251,6 +252,7 @@ import { CustomerProgressChartComponent } from './charts/customer-progress-chart
     MatTabsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatBadgeModule,
     MatChipsModule,
     MatCardModule,
     MatDatepickerModule,

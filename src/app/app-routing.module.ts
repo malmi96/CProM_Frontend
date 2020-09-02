@@ -53,7 +53,9 @@ import { CustomerDashboardComponent } from './customer-dashboard/customer-dashbo
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'gantt', component: GanttChartComponent },
+  { path: 'gantt',
+  component: GanttChartComponent,
+  canActivate: [AuthGuard, RoleGuard]},
   {
     path: 'inquiry',
     component: ViewInquiryComponent,
@@ -77,7 +79,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: ProjectManagaerDashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
   },
   {
     path: 'inventoryDashboard',
@@ -102,7 +104,7 @@ const routes: Routes = [
   {
     path: 'project',
     component: ProjectComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     children: [
       { path: 'add', component: AddProjectComponent },
       { path: 'view', component: ViewProjectComponent },
@@ -111,12 +113,12 @@ const routes: Routes = [
   {
     path: 'stage',
     component: StageComponentComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
   },
   {
     path: 'editProject/:id',
     component: EditProjectComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
   },
   {
     path: 'userRegister',
